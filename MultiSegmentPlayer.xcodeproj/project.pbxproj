@@ -150,11 +150,14 @@
 		869F8A602A7337A9003CC3CA /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F8A5F2A7337A9003CC3CA /* TrackView.swift */; };
 		869F8A622A733853003CC3CA /* AudioWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F8A612A733853003CC3CA /* AudioWaveform.swift */; };
 		869F8A642A73388D003CC3CA /* AudioKitUIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F8A632A73388D003CC3CA /* AudioKitUIHelpers.swift */; };
-		869F8A6A2A733A5D003CC3CA /* split2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 869F8A652A733A5C003CC3CA /* split2.mp3 */; };
-		869F8A6B2A733A5D003CC3CA /* split5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 869F8A662A733A5C003CC3CA /* split5.mp3 */; };
-		869F8A6C2A733A5D003CC3CA /* split1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 869F8A672A733A5C003CC3CA /* split1.mp3 */; };
-		869F8A6D2A733A5D003CC3CA /* split3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 869F8A682A733A5C003CC3CA /* split3.mp3 */; };
-		869F8A6E2A733A5D003CC3CA /* split4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 869F8A692A733A5D003CC3CA /* split4.mp3 */; };
+		86B0F7AA2A738AED00774C06 /* FirstSong_3-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86B0F7A62A738AED00774C06 /* FirstSong_3-2.mp3 */; };
+		86B0F7AB2A738AED00774C06 /* FirstSong_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86B0F7A72A738AED00774C06 /* FirstSong_2.mp3 */; };
+		86B0F7AC2A738AED00774C06 /* FirstSong_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86B0F7A82A738AED00774C06 /* FirstSong_1.mp3 */; };
+		86B0F7AD2A738AED00774C06 /* FirstSong_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86B0F7A92A738AED00774C06 /* FirstSong_3.mp3 */; };
+		86B0F7AF2A738D4B00774C06 /* AudioTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */; };
+		86B0F7B12A738D6600774C06 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B02A738D6600774C06 /* AccountModel.swift */; };
+		86B0F7B32A738D7300774C06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B22A738D7300774C06 /* Extensions.swift */; };
+		86B0F7B52A738D7F00774C06 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B42A738D7F00774C06 /* Macros.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -302,11 +305,14 @@
 		869F8A5F2A7337A9003CC3CA /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		869F8A612A733853003CC3CA /* AudioWaveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioWaveform.swift; sourceTree = "<group>"; };
 		869F8A632A73388D003CC3CA /* AudioKitUIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioKitUIHelpers.swift; sourceTree = "<group>"; };
-		869F8A652A733A5C003CC3CA /* split2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = split2.mp3; sourceTree = "<group>"; };
-		869F8A662A733A5C003CC3CA /* split5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = split5.mp3; sourceTree = "<group>"; };
-		869F8A672A733A5C003CC3CA /* split1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = split1.mp3; sourceTree = "<group>"; };
-		869F8A682A733A5C003CC3CA /* split3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = split3.mp3; sourceTree = "<group>"; };
-		869F8A692A733A5D003CC3CA /* split4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = split4.mp3; sourceTree = "<group>"; };
+		86B0F7A62A738AED00774C06 /* FirstSong_3-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "FirstSong_3-2.mp3"; sourceTree = "<group>"; };
+		86B0F7A72A738AED00774C06 /* FirstSong_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FirstSong_2.mp3; sourceTree = "<group>"; };
+		86B0F7A82A738AED00774C06 /* FirstSong_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FirstSong_1.mp3; sourceTree = "<group>"; };
+		86B0F7A92A738AED00774C06 /* FirstSong_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FirstSong_3.mp3; sourceTree = "<group>"; };
+		86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrackView.swift; sourceTree = "<group>"; };
+		86B0F7B02A738D6600774C06 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		86B0F7B22A738D7300774C06 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		86B0F7B42A738D7F00774C06 /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,12 +347,12 @@
 			children = (
 				869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */,
 				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
+				86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */,
+				86B0F7B02A738D6600774C06 /* AccountModel.swift */,
+				86B0F7B22A738D7300774C06 /* Extensions.swift */,
+				86B0F7B42A738D7F00774C06 /* Macros.swift */,
 				869F89382A732DE5003CC3CA /* ContentView.swift */,
-				869F8A672A733A5C003CC3CA /* split1.mp3 */,
-				869F8A652A733A5C003CC3CA /* split2.mp3 */,
-				869F8A682A733A5C003CC3CA /* split3.mp3 */,
-				869F8A692A733A5D003CC3CA /* split4.mp3 */,
-				869F8A662A733A5C003CC3CA /* split5.mp3 */,
+				86B0F7A52A738AB100774C06 /* Audio Files */,
 				869F893A2A732DE6003CC3CA /* Assets.xcassets */,
 				869F893C2A732DE6003CC3CA /* Preview Content */,
 				869F894E2A732EF7003CC3CA /* CustomAudioKit */,
@@ -507,6 +513,17 @@
 			path = CustomAudioKit;
 			sourceTree = "<group>";
 		};
+		86B0F7A52A738AB100774C06 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				86B0F7A82A738AED00774C06 /* FirstSong_1.mp3 */,
+				86B0F7A72A738AED00774C06 /* FirstSong_2.mp3 */,
+				86B0F7A62A738AED00774C06 /* FirstSong_3-2.mp3 */,
+				86B0F7A92A738AED00774C06 /* FirstSong_3.mp3 */,
+			);
+			path = "Audio Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -565,13 +582,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86B0F7AD2A738AED00774C06 /* FirstSong_3.mp3 in Resources */,
 				869F893E2A732DE6003CC3CA /* Preview Assets.xcassets in Resources */,
-				869F8A6D2A733A5D003CC3CA /* split3.mp3 in Resources */,
-				869F8A6E2A733A5D003CC3CA /* split4.mp3 in Resources */,
-				869F8A6B2A733A5D003CC3CA /* split5.mp3 in Resources */,
+				86B0F7AC2A738AED00774C06 /* FirstSong_1.mp3 in Resources */,
+				86B0F7AB2A738AED00774C06 /* FirstSong_2.mp3 in Resources */,
 				869F893B2A732DE6003CC3CA /* Assets.xcassets in Resources */,
-				869F8A6A2A733A5D003CC3CA /* split2.mp3 in Resources */,
-				869F8A6C2A733A5D003CC3CA /* split1.mp3 in Resources */,
+				86B0F7AA2A738AED00774C06 /* FirstSong_3-2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +639,7 @@
 				869F89D02A732F6C003CC3CA /* MIDIFile.swift in Sources */,
 				869F89A62A732F5F003CC3CA /* MIDICallbackInstrument.swift in Sources */,
 				869F89F12A732F88003CC3CA /* RingModulator.swift in Sources */,
+				86B0F7B52A738D7F00774C06 /* Macros.swift in Sources */,
 				869F894D2A732EE6003CC3CA /* Log.swift in Sources */,
 				869F8A322A732FAF003CC3CA /* AudioPlayer+Playback.swift in Sources */,
 				869F8A332A732FAF003CC3CA /* AudioPlayer+Buffering.swift in Sources */,
@@ -663,6 +680,7 @@
 				869F8A572A732FDB003CC3CA /* RawBufferTap.swift in Sources */,
 				869F89C62A732F68003CC3CA /* MIDITempoListener.swift in Sources */,
 				869F8A112A732F9D003CC3CA /* MatrixMixer.swift in Sources */,
+				86B0F7AF2A738D4B00774C06 /* AudioTrackView.swift in Sources */,
 				869F8A312A732FAF003CC3CA /* AudioPlayer+Scheduling.swift in Sources */,
 				869F897A2A732F42003CC3CA /* Settings+iOSVariants.swift in Sources */,
 				869F89A82A732F5F003CC3CA /* MIDIPlayer.swift in Sources */,
@@ -672,11 +690,13 @@
 				869F899E2A732F5F003CC3CA /* MIDISampler.swift in Sources */,
 				869F8A0C2A732F98003CC3CA /* PlaygroundNoiseGenerator.swift in Sources */,
 				869F8A022A732F90003CC3CA /* LowPassFilter.swift in Sources */,
+				86B0F7B32A738D7300774C06 /* Extensions.swift in Sources */,
 				869F89F02A732F88003CC3CA /* Decimator.swift in Sources */,
 				869F89F22A732F88003CC3CA /* AppleDistortion.swift in Sources */,
 				869F895C2A732F25003CC3CA /* FormatConverter+Compressed.swift in Sources */,
 				869F89B42A732F64003CC3CA /* MIDIControl.swift in Sources */,
 				869F895D2A732F25003CC3CA /* FormatConverter.swift in Sources */,
+				86B0F7B12A738D6600774C06 /* AccountModel.swift in Sources */,
 				869F89C12A732F68003CC3CA /* MIDISystemRealTimeObserver.swift in Sources */,
 				869F89BE2A732F68003CC3CA /* MIDIClockListener.swift in Sources */,
 				869F8A302A732FAF003CC3CA /* AudioPlayer+Legacy.swift in Sources */,

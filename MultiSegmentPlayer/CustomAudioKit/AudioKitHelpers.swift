@@ -200,12 +200,12 @@ public extension Occupiable {
     }
 }
 
-extension String: Occupiable {}
+//extension String: Occupiable {}
 
 // I can't think of a way to combine these collection types. Suggestions welcome.
-extension Array: Occupiable {}
-extension Dictionary: Occupiable {}
-extension Set: Occupiable {}
+//extension Array: Occupiable {}
+//extension Dictionary: Occupiable {}
+//extension Set: Occupiable {}
 
 #if !os(macOS)
     extension AVAudioSession.CategoryOptions: Occupiable {}

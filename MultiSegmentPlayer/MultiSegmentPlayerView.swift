@@ -59,11 +59,9 @@ class MultiSegmentPlayerConductor: ObservableObject {
     }
 
     func createSegments() {
-        guard let audio1URL = Bundle.main.url(forResource: "split1", withExtension: "mp3") else { return }
-        guard let audio2URL = Bundle.main.url(forResource: "split2", withExtension: "mp3") else { return }
-        guard let audio3URL = Bundle.main.url(forResource: "split3", withExtension: "mp3") else { return }
-        guard let audio4URL = Bundle.main.url(forResource: "split4", withExtension: "mp3") else { return }
-        guard let audio5URL = Bundle.main.url(forResource: "split5", withExtension: "mp3") else { return }
+        guard let audio1URL = Bundle.main.url(forResource: "FirstSong_1", withExtension: "mp3") else { return }
+        guard let audio2URL = Bundle.main.url(forResource: "FirstSong_2", withExtension: "mp3") else { return }
+        guard let audio3URL = Bundle.main.url(forResource: "FirstSong_3", withExtension: "mp3") else { return }
 
         guard let segment1 = try? MockSegment(audioFileURL: audio1URL,
                                               playbackStartTime: 0.0,
@@ -76,16 +74,8 @@ class MultiSegmentPlayerConductor: ObservableObject {
         guard let segment3 = try? MockSegment(audioFileURL: audio3URL,
                                               playbackStartTime: segment2.playbackEndTime - 0.07,
                                               rmsFramesPerSecond: rmsFramesPerSecond) else { return }
-        
-        guard let segment4 = try? MockSegment(audioFileURL: audio4URL,
-                                              playbackStartTime: segment3.playbackEndTime - 0.07,
-                                              rmsFramesPerSecond: rmsFramesPerSecond) else { return }
-        
-        guard let segment5 = try? MockSegment(audioFileURL: audio5URL,
-                                              playbackStartTime: segment4.playbackEndTime - 0.07,
-                                              rmsFramesPerSecond: rmsFramesPerSecond) else { return }
 
-        segments = [segment1, segment2, segment3, segment4, segment5]
+        segments = [segment1, segment2, segment3]
     }
 
     func setEndTime() {
