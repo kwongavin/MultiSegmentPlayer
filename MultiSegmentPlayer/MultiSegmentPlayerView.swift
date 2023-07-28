@@ -70,7 +70,7 @@ class MultiSegmentPlayerConductor: ObservableObject {
                                               rmsFramesPerSecond: rmsFramesPerSecond) else { return }
 
         guard let segment2 = try? MockSegment(audioFileURL: audio2URL,
-                                              playbackStartTime: segment1.playbackEndTime - 0.1,
+                                              playbackStartTime: segment1.playbackEndTime - 0.07,
                                               rmsFramesPerSecond: rmsFramesPerSecond) else { return }
 
         guard let segment3 = try? MockSegment(audioFileURL: audio3URL,

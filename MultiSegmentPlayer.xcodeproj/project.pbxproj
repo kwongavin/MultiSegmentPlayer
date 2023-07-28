@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		869F89372A732DE5003CC3CA /* NewCrazyThingThatWontWorkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89362A732DE5003CC3CA /* NewCrazyThingThatWontWorkApp.swift */; };
+		869F89372A732DE5003CC3CA /* MultiSegmentPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */; };
 		869F89392A732DE5003CC3CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89382A732DE5003CC3CA /* ContentView.swift */; };
 		869F893B2A732DE6003CC3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893A2A732DE6003CC3CA /* Assets.xcassets */; };
 		869F893E2A732DE6003CC3CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */; };
@@ -158,8 +158,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		869F89332A732DE5003CC3CA /* NewCrazyThingThatWontWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewCrazyThingThatWontWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		869F89362A732DE5003CC3CA /* NewCrazyThingThatWontWorkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCrazyThingThatWontWorkApp.swift; sourceTree = "<group>"; };
+		869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSegmentPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayer.swift; sourceTree = "<group>"; };
 		869F89382A732DE5003CC3CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		869F893A2A732DE6003CC3CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 		869F892A2A732DE5003CC3CA = {
 			isa = PBXGroup;
 			children = (
-				869F89352A732DE5003CC3CA /* NewCrazyThingThatWontWork */,
+				869F89352A732DE5003CC3CA /* MultiSegmentPlayer */,
 				869F89342A732DE5003CC3CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -331,15 +331,15 @@
 		869F89342A732DE5003CC3CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				869F89332A732DE5003CC3CA /* NewCrazyThingThatWontWork.app */,
+				869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		869F89352A732DE5003CC3CA /* NewCrazyThingThatWontWork */ = {
+		869F89352A732DE5003CC3CA /* MultiSegmentPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				869F89362A732DE5003CC3CA /* NewCrazyThingThatWontWorkApp.swift */,
+				869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */,
 				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
 				869F89382A732DE5003CC3CA /* ContentView.swift */,
 				869F8A672A733A5C003CC3CA /* split1.mp3 */,
@@ -351,7 +351,7 @@
 				869F893C2A732DE6003CC3CA /* Preview Content */,
 				869F894E2A732EF7003CC3CA /* CustomAudioKit */,
 			);
-			path = NewCrazyThingThatWontWork;
+			path = MultiSegmentPlayer;
 			sourceTree = "<group>";
 		};
 		869F893C2A732DE6003CC3CA /* Preview Content */ = {
@@ -510,9 +510,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		869F89322A732DE5003CC3CA /* NewCrazyThingThatWontWork */ = {
+		869F89322A732DE5003CC3CA /* MultiSegmentPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 869F89412A732DE6003CC3CA /* Build configuration list for PBXNativeTarget "NewCrazyThingThatWontWork" */;
+			buildConfigurationList = 869F89412A732DE6003CC3CA /* Build configuration list for PBXNativeTarget "MultiSegmentPlayer" */;
 			buildPhases = (
 				869F892F2A732DE5003CC3CA /* Sources */,
 				869F89302A732DE5003CC3CA /* Frameworks */,
@@ -522,9 +522,9 @@
 			);
 			dependencies = (
 			);
-			name = NewCrazyThingThatWontWork;
+			name = MultiSegmentPlayer;
 			productName = NewCrazyThingThatWontWork;
-			productReference = 869F89332A732DE5003CC3CA /* NewCrazyThingThatWontWork.app */;
+			productReference = 869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -542,7 +542,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 869F892E2A732DE5003CC3CA /* Build configuration list for PBXProject "NewCrazyThingThatWontWork" */;
+			buildConfigurationList = 869F892E2A732DE5003CC3CA /* Build configuration list for PBXProject "MultiSegmentPlayer" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -555,7 +555,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				869F89322A732DE5003CC3CA /* NewCrazyThingThatWontWork */,
+				869F89322A732DE5003CC3CA /* MultiSegmentPlayer */,
 			);
 		};
 /* End PBXProject section */
@@ -701,7 +701,7 @@
 				869F89B02A732F64003CC3CA /* MIDISystemCommand.swift in Sources */,
 				869F897E2A732F47003CC3CA /* Table+AdditiveSynthesis.swift in Sources */,
 				869F8A1D2A732FA1003CC3CA /* NamedNode.swift in Sources */,
-				869F89372A732DE5003CC3CA /* NewCrazyThingThatWontWorkApp.swift in Sources */,
+				869F89372A732DE5003CC3CA /* MultiSegmentPlayer.swift in Sources */,
 				869F89A22A732F5F003CC3CA /* MIDI+VirtualPorts.swift in Sources */,
 				869F8A272A732FAA003CC3CA /* PresetBuilder.swift in Sources */,
 				869F89DB2A732F70003CC3CA /* MIDIPacket+SequenceType.swift in Sources */,
@@ -850,7 +850,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NewCrazyThingThatWontWork/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MultiSegmentPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = 95GVZGQJ97;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -879,7 +879,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NewCrazyThingThatWontWork/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MultiSegmentPlayer/Preview Content\"";
 				DEVELOPMENT_TEAM = 95GVZGQJ97;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -904,7 +904,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		869F892E2A732DE5003CC3CA /* Build configuration list for PBXProject "NewCrazyThingThatWontWork" */ = {
+		869F892E2A732DE5003CC3CA /* Build configuration list for PBXProject "MultiSegmentPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				869F893F2A732DE6003CC3CA /* Debug */,
@@ -913,7 +913,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		869F89412A732DE6003CC3CA /* Build configuration list for PBXNativeTarget "NewCrazyThingThatWontWork" */ = {
+		869F89412A732DE6003CC3CA /* Build configuration list for PBXNativeTarget "MultiSegmentPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				869F89422A732DE6003CC3CA /* Debug */,
