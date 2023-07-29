@@ -12,6 +12,7 @@ struct NewCrazyThingThatWontWorkApp: App {
     var body: some Scene {
         WindowGroup {
             AudioTrackView()
+                .environmentObject(AccountModel())
         }
     }
 }
