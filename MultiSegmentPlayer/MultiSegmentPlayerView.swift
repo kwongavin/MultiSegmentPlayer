@@ -38,6 +38,9 @@ class MultiSegmentPlayerConductor: ObservableObject {
         didSet {
             if !isPlaying {
                 player.stop()
+                engine.stop()
+                startAudioEngine()
+                _timeStamp = 0
             } else {
                 timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
                 player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
