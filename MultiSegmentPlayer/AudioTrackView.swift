@@ -397,15 +397,16 @@ extension AudioTrackView {
                         // remove dragged item from all sections
                         removeFromAllSections(itemToRemove: receivedItem)
                         
-                        print("receivedItem: \(receivedItem)")
-                        print("section info: \(sectionInfo.wrappedValue.toDictionary().toString())")
-                        print(sectionInfo.wrappedValue)
-                        
-                        // get new index of the drop zone
+                        // get new index of the drop zone after removing the item
                         guard let newIndex = sectionInfo.wrappedValue.tracks.firstIndex(where: { $0.id == trackId }) else { return false }
                         
                         // add item to the drop zone index
                         sectionInfo.wrappedValue.tracks[newIndex].items.append(receivedItem)
+                        
+//                        // save the dropped URL in the track's URL property
+//                        if let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem }) {
+//                            sectionInfo.wrappedValue.tracks[newIndex].url = url
+//                        }
                         
                         return true
                     }
