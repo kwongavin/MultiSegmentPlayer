@@ -11,7 +11,7 @@ import SwiftUI
 struct NewCrazyThingThatWontWorkApp: App {
     var body: some Scene {
         WindowGroup {
-            MultiSegmentPlayerView()
+            MainTabview()
                 .environmentObject(AccountModel())
         }
     }

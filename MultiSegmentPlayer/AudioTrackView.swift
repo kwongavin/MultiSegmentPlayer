@@ -17,6 +17,7 @@ struct SectionInfo: Identifiable, Equatable, Codable {
     struct Track: Identifiable, Equatable, Codable {
         var id = UUID().uuidString
         var items: [String] = []
+        var url: URL?
     }
     
 }
@@ -24,6 +25,7 @@ struct SectionInfo: Identifiable, Equatable, Codable {
 struct AudioTrackView: View {
     
     @EnvironmentObject var accountModel: AccountModel
+//    @ObservedObject var conductor = MultiSegmentPlayerConductor()
     
     // This array already exists as String array of song titles
 //    @State var tracks = ["test1", "test2"]
@@ -46,7 +48,7 @@ struct AudioTrackView: View {
     // Error messages
     @State private var errorMessage: String?
     
-    @State private var sections: [SectionInfo] = []
+//    @State private var sections: [SectionInfo] = []
 //    [
 //        SectionInfo(title: "Song 1"),
 //        SectionInfo(title: "Song 2"),
@@ -95,7 +97,7 @@ struct AudioTrackView: View {
                 sec.append(SectionInfo(title: track))
             }
             
-            self.sections = sec
+            accountModel.sections = sec
 
         })
         .onChange(of: accountModel.tracks) { newValue in
@@ -105,7 +107,7 @@ struct AudioTrackView: View {
                 sec.append(SectionInfo(title: track))
             }
             
-            self.sections = sec
+            accountModel.sections = sec
         }
     }
     
@@ -311,7 +313,7 @@ extension AudioTrackView {
             
             VStack {
                 
-                ForEach($sections) { sectionInfo in
+                ForEach($accountModel.sections) { sectionInfo in
                                         
                     VStack {
                         
@@ -516,6 +518,7 @@ extension AudioTrackView {
                     
                     Button(action: {
                         isPlayerOn.toggle()
+                        print(accountModel.sections)
                     }, label: {
                         Image(systemName: isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
                             .resizable()
@@ -601,6 +604,8 @@ extension AudioTrackView {
             let fileURLs = try result.get()
             self.fileURLs = fileURLs
             self.audioFiles = fileURLs.map { $0.lastPathComponent }
+            
+//            conductor.addDownloadedSegments(audioFiles: audioFiles, fileURLs: fileURLs)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -610,23 +615,23 @@ extension AudioTrackView {
     private func removeFromAllSections(itemToRemove: String) {
         
         // looping through index of every section
-        for sectionIndex in 0 ..< self.sections.count {
+        for sectionIndex in 0 ..< accountModel.sections.count {
             
             // looping through index of every track
-            for trackIndex in 0 ..< sections[sectionIndex].tracks.count {
+            for trackIndex in 0 ..< accountModel.sections[sectionIndex].tracks.count {
                 
                 // remove selected track
-                if itemToRemove == sections[sectionIndex].selectedTrack {
-                    sections[sectionIndex].selectedTrack = ""
+                if itemToRemove == accountModel.sections[sectionIndex].selectedTrack {
+                    accountModel.sections[sectionIndex].selectedTrack = ""
                 }
                 
                 // remove all items matching the name of the song to remove
-                sections[sectionIndex].tracks[trackIndex].items.removeAll(where: { $0 == itemToRemove } )
+                accountModel.sections[sectionIndex].tracks[trackIndex].items.removeAll(where: { $0 == itemToRemove } )
                 
             }
             
             // remove the tracks which have empty tracks
-            sections[sectionIndex].tracks.removeAll(where: {$0.items.count == 0})
+            accountModel.sections[sectionIndex].tracks.removeAll(where: {$0.items.count == 0})
             
         }
         

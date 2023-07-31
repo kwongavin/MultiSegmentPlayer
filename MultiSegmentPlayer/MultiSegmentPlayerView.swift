@@ -42,6 +42,7 @@ class MultiSegmentPlayerConductor: ObservableObject {
                 startAudioEngine()
                 _timeStamp = 0
             } else {
+                print(segments)
                 timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
                 player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
             }
@@ -79,6 +80,19 @@ class MultiSegmentPlayerConductor: ObservableObject {
                                               rmsFramesPerSecond: rmsFramesPerSecond) else { return }
 
         segments = [segment1, segment2, segment3]
+    }
+    
+    func addDownloadedSegments(audioFiles: [String], fileURLs: [URL]) {
+        // Loop through the downloaded audio files and their URLs
+        for (index, audioFile) in audioFiles.enumerated() {
+            let fileURL = fileURLs[index]
+            // Create a new MockSegment instance using the audio file and its URL
+            if let segment = try? MockSegment(audioFileURL: fileURL, playbackStartTime: timeStamp, rmsFramesPerSecond: rmsFramesPerSecond) {
+                segments.append(segment)
+            }
+        }
+        // Update the endTime property to reflect the new segments
+        setEndTime()
     }
 
     func setEndTime() {

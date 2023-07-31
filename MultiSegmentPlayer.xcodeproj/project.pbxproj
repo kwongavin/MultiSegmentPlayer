@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8692572E2A7739C100944506 /* MainTabview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8692572D2A7739C100944506 /* MainTabview.swift */; };
 		869F89372A732DE5003CC3CA /* MultiSegmentPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */; };
 		869F89392A732DE5003CC3CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89382A732DE5003CC3CA /* ContentView.swift */; };
 		869F893B2A732DE6003CC3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893A2A732DE6003CC3CA /* Assets.xcassets */; };
@@ -161,6 +162,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8692572D2A7739C100944506 /* MainTabview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabview.swift; sourceTree = "<group>"; };
 		869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSegmentPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayer.swift; sourceTree = "<group>"; };
 		869F89382A732DE5003CC3CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */,
+				8692572D2A7739C100944506 /* MainTabview.swift */,
 				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
 				86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */,
 				86B0F7B02A738D6600774C06 /* AccountModel.swift */,
@@ -685,6 +688,7 @@
 				869F897A2A732F42003CC3CA /* Settings+iOSVariants.swift in Sources */,
 				869F89A82A732F5F003CC3CA /* MIDIPlayer.swift in Sources */,
 				869F89C52A732F68003CC3CA /* MIDITempoObserver.swift in Sources */,
+				8692572E2A7739C100944506 /* MainTabview.swift in Sources */,
 				869F89542A732F1D003CC3CA /* AVAudioPCMBuffer+Processing.swift in Sources */,
 				869F8A602A7337A9003CC3CA /* TrackView.swift in Sources */,
 				869F899E2A732F5F003CC3CA /* MIDISampler.swift in Sources */,

@@ -11,5 +11,6 @@ class AccountModel: ObservableObject {
     
     // Track names, user can add-subtract this values at any time.
     @Published var tracks: [String] = ["Hey Jude", "Yesterday", "Come Together"]
+    @Published var sections: [SectionInfo] = []
     
 }
