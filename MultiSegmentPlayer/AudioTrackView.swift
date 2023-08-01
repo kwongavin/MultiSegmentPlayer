@@ -402,11 +402,16 @@ extension AudioTrackView {
                         
                         // add item to the drop zone index
                         sectionInfo.wrappedValue.tracks[newIndex].items.append(receivedItem)
+                        //sectionInfo.wrappedValue.tracks[newIndex].url =
                         
 //                        // save the dropped URL in the track's URL property
-//                        if let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem }) {
-//                            sectionInfo.wrappedValue.tracks[newIndex].url = url
-//                        }
+                       // fileURLs.first(where: { $0.lastPathComponent == receivedItem})
+                       // let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem })
+                        if let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem }) {
+                            sectionInfo.wrappedValue.tracks[newIndex].url = url
+                        }
+                        
+                        printOnDebug(sectionInfo.wrappedValue)
                         
                         return true
                     }
@@ -429,7 +434,7 @@ extension AudioTrackView {
 
     }
     
-    private func SectionListRowView(geo: GeometryProxy, trackTitle: String, sectionInfo: Binding<SectionInfo>) -> some View {
+    private func SectionListRowView(geo: GeometryProxy, trackTitle: String, sectionInfo:Binding<SectionInfo>) -> some View {
         
         Text(getIndex(trackTitle: trackTitle, tracks: sectionInfo.wrappedValue.tracks))
             .frame(height: 30)
