@@ -163,6 +163,7 @@
 
 /* Begin PBXFileReference section */
 		8692572D2A7739C100944506 /* MainTabview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabview.swift; sourceTree = "<group>"; };
+		8692572F2A7A143300944506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSegmentPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayer.swift; sourceTree = "<group>"; };
 		869F89382A732DE5003CC3CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -347,6 +348,7 @@
 		869F89352A732DE5003CC3CA /* MultiSegmentPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				8692572F2A7A143300944506 /* Info.plist */,
 				869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */,
 				8692572D2A7739C100944506 /* MainTabview.swift */,
 				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
@@ -878,6 +880,7 @@
 				DEVELOPMENT_TEAM = 95GVZGQJ97;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MultiSegmentPlayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -907,6 +910,7 @@
 				DEVELOPMENT_TEAM = 95GVZGQJ97;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MultiSegmentPlayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

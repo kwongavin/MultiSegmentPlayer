@@ -10,6 +10,7 @@ import SwiftUI
 class MultiSegmentPlayerConductor: ObservableObject {
     let engine = AudioEngine()
     let player = MultiSegmentAudioPlayer()
+    let accountModel = AccountModel()
 
     var timer: Timer!
     var timePrevious: TimeInterval = .init(DispatchTime.now().uptimeNanoseconds) / 1_000_000_000
@@ -30,27 +31,33 @@ class MultiSegmentPlayerConductor: ObservableObject {
         }
     }
 
-    @Published var segments = [MockSegment]()
     var rmsFramesPerSecond: Double = 15
     var pixelsPerRMS: Double = 1
 
     @Published var isPlaying: Bool = false {
         didSet {
             if !isPlaying {
-                player.stop()
                 engine.stop()
                 startAudioEngine()
                 _timeStamp = 0
+                // Stop accessing the security-scoped resource for all segments
+                for segment in accountModel.segments {
+                    segment.audioFileURL.stopAccessingSecurityScopedResource()
+                }
             } else {
-                print(segments)
                 timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
-                player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
+                // Start accessing the security-scoped resource for all segments
+                for segment in accountModel.segments {
+                    _ = segment.audioFileURL.startAccessingSecurityScopedResource()
+                }
+                player.playSegments(audioSegments: accountModel.segments, referenceTimeStamp: timeStamp)
             }
         }
     }
 
+
     init() {
-        createSegments()
+//        accountModel.createSegments()
         setEndTime()
         setAudioSessionCategoriesWithOptions()
         routeAudioToOutput()
@@ -62,41 +69,8 @@ class MultiSegmentPlayerConductor: ObservableObject {
                                      repeats: true)
     }
 
-    func createSegments() {
-        guard let audio1URL = Bundle.main.url(forResource: "FirstSong_1", withExtension: "mp3") else { return }
-        guard let audio2URL = Bundle.main.url(forResource: "FirstSong_2", withExtension: "mp3") else { return }
-        guard let audio3URL = Bundle.main.url(forResource: "FirstSong_3", withExtension: "mp3") else { return }
-
-        guard let segment1 = try? MockSegment(audioFileURL: audio1URL,
-                                              playbackStartTime: 0.0,
-                                              rmsFramesPerSecond: rmsFramesPerSecond) else { return }
-
-        guard let segment2 = try? MockSegment(audioFileURL: audio2URL,
-                                              playbackStartTime: segment1.playbackEndTime - 0.07,
-                                              rmsFramesPerSecond: rmsFramesPerSecond) else { return }
-
-        guard let segment3 = try? MockSegment(audioFileURL: audio3URL,
-                                              playbackStartTime: segment2.playbackEndTime - 0.07,
-                                              rmsFramesPerSecond: rmsFramesPerSecond) else { return }
-
-        segments = [segment1, segment2, segment3]
-    }
-    
-    func addDownloadedSegments(audioFiles: [String], fileURLs: [URL]) {
-        // Loop through the downloaded audio files and their URLs
-        for (index, audioFile) in audioFiles.enumerated() {
-            let fileURL = fileURLs[index]
-            // Create a new MockSegment instance using the audio file and its URL
-            if let segment = try? MockSegment(audioFileURL: fileURL, playbackStartTime: timeStamp, rmsFramesPerSecond: rmsFramesPerSecond) {
-                segments.append(segment)
-            }
-        }
-        // Update the endTime property to reflect the new segments
-        setEndTime()
-    }
-
     func setEndTime() {
-        endTime = segments[segments.count - 1].playbackEndTime
+        endTime = 10.0 // segments[segments.count - 1].playbackEndTime
     }
 
     @objc func checkTime() {
@@ -109,7 +83,12 @@ class MultiSegmentPlayerConductor: ObservableObject {
 
     func setAudioSessionCategoriesWithOptions() {
         do {
-            try Settings.session.setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
+            try Settings.session.setCategory(.playAndRecord,
+                                             options: [.defaultToSpeaker,
+                                                       .mixWithOthers,
+                                                       .allowBluetooth,
+                                                       .allowBluetoothA2DP,
+                                                       .allowAirPlay])
             try Settings.session.setActive(true)
         } catch {
             assertionFailure(error.localizedDescription)
@@ -132,6 +111,7 @@ class MultiSegmentPlayerConductor: ObservableObject {
 
 struct MultiSegmentPlayerView: View {
     @ObservedObject var conductor = MultiSegmentPlayerConductor()
+    @EnvironmentObject var accountModel: AccountModel
 
     var currentTimeText: String {
         let currentTime = String(format: "%.1f", conductor.timeStamp)
@@ -149,7 +129,7 @@ struct MultiSegmentPlayerView: View {
     var body: some View {
         VStack {
             ZStack(alignment: .leading) {
-                TrackView(segments: conductor.segments,
+                TrackView(segments: accountModel.segments,
                           rmsFramesPerSecond: conductor.rmsFramesPerSecond,
                           pixelsPerRMS: conductor.pixelsPerRMS)
 

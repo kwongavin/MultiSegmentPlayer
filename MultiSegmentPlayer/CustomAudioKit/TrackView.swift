@@ -73,9 +73,12 @@ public struct MockSegment: ViewableSegment, StreamableAudioSegment {
         let duration = fileEndTime - fileStartTime
         return playbackStartTime + duration
     }
+    
+    var audioFileURL: URL // Add this property
 
     public init(audioFileURL: URL, playbackStartTime: TimeInterval, rmsFramesPerSecond: Double) throws {
         do {
+            self.audioFileURL = audioFileURL
             self.playbackStartTime = playbackStartTime
             self.rmsFramesPerSecond = rmsFramesPerSecond
             audioFile = try AVAudioFile(forReading: audioFileURL)

@@ -404,9 +404,7 @@ extension AudioTrackView {
                         sectionInfo.wrappedValue.tracks[newIndex].items.append(receivedItem)
                         //sectionInfo.wrappedValue.tracks[newIndex].url =
                         
-//                        // save the dropped URL in the track's URL property
-                       // fileURLs.first(where: { $0.lastPathComponent == receivedItem})
-                       // let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem })
+                        // save the dropped URL in the track's URL property
                         if let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem }) {
                             sectionInfo.wrappedValue.tracks[newIndex].url = url
                         }
@@ -428,7 +426,16 @@ extension AudioTrackView {
         .dropDestination(for: String.self) { values, _ in
             guard let item = values.first else { return true }
             removeFromAllSections(itemToRemove: item)
-            sectionInfo.wrappedValue.tracks.append(SectionInfo.Track(items: [item]))
+            var track = SectionInfo.Track(items: [item])
+            
+            // save the dropped URL in the track's URL property
+            if let url = fileURLs.first(where: { $0.lastPathComponent == item }) {
+                track.url = url
+            }
+            
+            sectionInfo.wrappedValue.tracks.append(track)
+            
+            print("**** sectionInfo tracks: \(sectionInfo.wrappedValue.tracks)")
             return true
         }
 
@@ -524,7 +531,8 @@ extension AudioTrackView {
                     
                     Button(action: {
                         isPlayerOn.toggle()
-                        print(accountModel.sections)
+                        accountModel.createSegments()
+                        print("*** occupied segments: \(accountModel.segments)")
                     }, label: {
                         Image(systemName: isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
                             .resizable()
@@ -611,7 +619,6 @@ extension AudioTrackView {
             self.fileURLs = fileURLs
             self.audioFiles = fileURLs.map { $0.lastPathComponent }
             
-//            conductor.addDownloadedSegments(audioFiles: audioFiles, fileURLs: fileURLs)
         } catch {
             errorMessage = error.localizedDescription
         }
