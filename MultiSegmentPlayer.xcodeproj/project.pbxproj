@@ -348,7 +348,6 @@
 		869F89352A732DE5003CC3CA /* MultiSegmentPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				8692572F2A7A143300944506 /* Info.plist */,
 				869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */,
 				8692572D2A7739C100944506 /* MainTabview.swift */,
 				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
@@ -359,6 +358,7 @@
 				869F89382A732DE5003CC3CA /* ContentView.swift */,
 				86B0F7A52A738AB100774C06 /* Audio Files */,
 				869F893A2A732DE6003CC3CA /* Assets.xcassets */,
+				8692572F2A7A143300944506 /* Info.plist */,
 				869F893C2A732DE6003CC3CA /* Preview Content */,
 				869F894E2A732EF7003CC3CA /* CustomAudioKit */,
 			);
@@ -886,6 +886,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -916,6 +917,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

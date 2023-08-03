@@ -58,6 +58,7 @@ struct AudioTrackView: View {
     
     @State private var isOnAppearCalled = false // for calling on appear only once
     
+    @State private var titleDisplayIndex = 0
     
     var body: some View {
         
@@ -508,9 +509,15 @@ extension AudioTrackView {
         Group {
             Divider()
             
-            Text("AUDIO PLAYER")
-                .font(Font.custom("Futura Medium", size: geo.size.width*0.04))
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Text("AUDIO PLAYER")
+                Spacer()
+                if isPlayerOn {
+                    Text("::: \(accountModel.tracks[titleDisplayIndex])")
+                }
+            }
+            .font(Font.custom("Futura Medium", size: geo.size.width*0.04))
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             ZStack {
                 Rectangle()
@@ -521,7 +528,13 @@ extension AudioTrackView {
                     .opacity(0.8)
                 
                 HStack(spacing: geo.size.width*0.08) {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        if titleDisplayIndex > 0 {
+                            titleDisplayIndex -= 1
+                        } else {
+                            titleDisplayIndex = accountModel.tracks.count - 1
+                        }
+                    }, label: {
                         Image(systemName: "backward.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -541,7 +554,9 @@ extension AudioTrackView {
                             .foregroundColor(.white)
                     })
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        titleDisplayIndex = (titleDisplayIndex + 1) % accountModel.tracks.count
+                    }, label: {
                         Image(systemName: "forward.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
