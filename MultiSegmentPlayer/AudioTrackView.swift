@@ -436,7 +436,6 @@ extension AudioTrackView {
             
             sectionInfo.wrappedValue.tracks.append(track)
             
-            print("**** sectionInfo tracks: \(sectionInfo.wrappedValue.tracks)")
             return true
         }
 
@@ -545,7 +544,6 @@ extension AudioTrackView {
                     Button(action: {
                         isPlayerOn.toggle()
                         accountModel.createSegments()
-                        print("*** occupied segments: \(accountModel.segments)")
                     }, label: {
                         Image(systemName: isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
                             .resizable()

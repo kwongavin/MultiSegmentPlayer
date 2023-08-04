@@ -58,9 +58,7 @@ struct MultiSegmentPlayerView: View {
                 .scaledToFit()
                 .frame(width: 24)
                 .contentShape(Rectangle())
-                .onTapGesture { isPlaying.toggle()
-                    print("*** number of segments? : \(accountModel.segments.count)")
-                }
+                .onTapGesture { isPlaying.toggle() }
         }
     }
 }

@@ -33,7 +33,7 @@ class AccountModel: ObservableObject {
                 if didStartAccessing {
                     defer { url.stopAccessingSecurityScopedResource() }
                     
-                    // The playback start time for each segment is the playback end time of the last segment, minus 0.07.
+                    // The playback start time for each segment is the playback end time of the last segment, minus 0.07 (To avoid breaks).
                     // If there is no last segment (i.e., if this is the first segment), we default to 0.0.
                     let playbackStartTime = (newSegments.last?.playbackEndTime ?? 0.0) - 0.07
                     
