@@ -47,6 +47,7 @@ class AccountModel: ObservableObject {
         
         self.segments = newSegments
         print("** Accountmodel.createSegments() : \(self.segments)")
+        print("** number of segments : \(self.segments.count)")
     }
 
 }

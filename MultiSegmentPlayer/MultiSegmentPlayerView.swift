@@ -70,7 +70,11 @@ class MultiSegmentPlayerConductor: ObservableObject {
     }
 
     func setEndTime() {
-        endTime = 10.0 // segments[segments.count - 1].playbackEndTime
+        if accountModel.segments.count == 0 {
+            endTime = 10.0
+        } else {
+            endTime = 8.0 // segments[segments.count - 1].playbackEndTime
+        }
     }
 
     @objc func checkTime() {
@@ -141,7 +145,7 @@ struct MultiSegmentPlayerView: View {
             .frame(height: 200)
             .padding()
 
-            PlayPauseView(isPlaying: $conductor.isPlaying).frame(height: 30)
+            PlayPauseView(isPlaying: $conductor.isPlaying, accountModel: accountModel).frame(height: 30)
 
             Text(currentTimeText)
                 .padding(.top)
@@ -152,6 +156,7 @@ struct MultiSegmentPlayerView: View {
 
     struct PlayPauseView: View {
         @Binding var isPlaying: Bool
+        @ObservedObject var accountModel: AccountModel
 
         var body: some View {
             Image(systemName: !isPlaying ? "play" : "pause")
@@ -159,7 +164,9 @@ struct MultiSegmentPlayerView: View {
                 .scaledToFit()
                 .frame(width: 24)
                 .contentShape(Rectangle())
-                .onTapGesture { isPlaying.toggle() }
+                .onTapGesture { isPlaying.toggle()
+                    print("*** number of segments? : \(accountModel.segments.count)")
+                }
         }
     }
 }
@@ -180,5 +187,6 @@ private extension Comparable {
 struct MultiSegmentPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         MultiSegmentPlayerView()
+            .environmentObject(AccountModel())
     }
 }
