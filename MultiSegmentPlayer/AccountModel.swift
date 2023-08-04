@@ -22,23 +22,22 @@ class AccountModel: ObservableObject {
         }
     }
     
-    public func createSegments() {
+    func createSegments() {
         var newSegments: [MockSegment] = []
         
         for section in sections {
             for track in section.tracks {
                 guard let url = track.url else { continue }
-                let didStartAccessing = url.startAccessingSecurityScopedResource() // this allows display audio waveforms to display.
+                let didStartAccessing = url.startAccessingSecurityScopedResource()
                 
                 if didStartAccessing {
-                    // Make sure to call the stopAccessingSecurityScopedResource() method when you're done with the file
                     defer { url.stopAccessingSecurityScopedResource() }
                     
-                    print("** these are URLs: \(url)")
-                    let playbackStartTime = newSegments.last?.playbackEndTime ?? 0.0 - 0.07
-                    if let segment = try? MockSegment(audioFileURL: url,
-                                                      playbackStartTime: playbackStartTime,
-                                                      rmsFramesPerSecond: rmsFramesPerSecond) {
+                    // The playback start time for each segment is the playback end time of the last segment, minus 0.07.
+                    // If there is no last segment (i.e., if this is the first segment), we default to 0.0.
+                    let playbackStartTime = (newSegments.last?.playbackEndTime ?? 0.0) - 0.07
+                    
+                    if let segment = try? MockSegment(audioFileURL: url, playbackStartTime: playbackStartTime, rmsFramesPerSecond: rmsFramesPerSecond) {
                         newSegments.append(segment)
                     }
                 } else {
@@ -48,8 +47,6 @@ class AccountModel: ObservableObject {
         }
         
         self.segments = newSegments
-        print("** Accountmodel.createSegments() : \(self.segments)")
-        print("** number of segments : \(self.segments.count)")
     }
     
     // Moving MultiSegmentPlayerConductor class to here to merge data
