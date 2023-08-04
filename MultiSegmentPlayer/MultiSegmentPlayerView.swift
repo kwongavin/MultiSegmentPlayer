@@ -114,18 +114,18 @@ class MultiSegmentPlayerConductor: ObservableObject {
 }
 
 struct MultiSegmentPlayerView: View {
-    @ObservedObject var conductor = MultiSegmentPlayerConductor()
+//    @ObservedObject var conductor = MultiSegmentPlayerConductor()
     @EnvironmentObject var accountModel: AccountModel
 
     var currentTimeText: String {
-        let currentTime = String(format: "%.1f", conductor.timeStamp)
-        let endTime = String(format: "%.1f", conductor.endTime)
+        let currentTime = String(format: "%.1f", accountModel.timeStamp)
+        let endTime = String(format: "%.1f", accountModel.endTime)
         return currentTime + " of " + endTime
     }
 
     var currentPlayPosition: CGFloat {
-        let pixelsPerSecond = conductor.pixelsPerRMS * conductor.rmsFramesPerSecond
-        return conductor.timeStamp * pixelsPerSecond - playheadWidth
+        let pixelsPerSecond = accountModel.pixelsPerRMS * accountModel.rmsFramesPerSecond
+        return accountModel.timeStamp * pixelsPerSecond - playheadWidth
     }
 
     let playheadWidth: CGFloat = 2
@@ -134,8 +134,8 @@ struct MultiSegmentPlayerView: View {
         VStack {
             ZStack(alignment: .leading) {
                 TrackView(segments: accountModel.segments,
-                          rmsFramesPerSecond: conductor.rmsFramesPerSecond,
-                          pixelsPerRMS: conductor.pixelsPerRMS)
+                          rmsFramesPerSecond: accountModel.rmsFramesPerSecond,
+                          pixelsPerRMS: accountModel.pixelsPerRMS)
 
                 Rectangle()
                     .fill(.red)
@@ -145,7 +145,7 @@ struct MultiSegmentPlayerView: View {
             .frame(height: 200)
             .padding()
 
-            PlayPauseView(isPlaying: $conductor.isPlaying, accountModel: accountModel).frame(height: 30)
+            PlayPauseView(isPlaying: $accountModel.isPlaying, accountModel: accountModel).frame(height: 30)
 
             Text(currentTimeText)
                 .padding(.top)
