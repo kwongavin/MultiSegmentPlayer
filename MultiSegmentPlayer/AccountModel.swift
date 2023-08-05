@@ -80,7 +80,7 @@ class AccountModel: ObservableObject {
         didSet {
             if !isPlaying {
                 engine.stop()
-                startAudioEngine()
+                startAudioEngine() // this is temporary solution, should be player.stop()
                 _timeStamp = 0
                 // Stop accessing the security-scoped resource for all segments
                 for segment in segments {
