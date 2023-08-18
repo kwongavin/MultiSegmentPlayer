@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8692572E2A7739C100944506 /* MainTabview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8692572D2A7739C100944506 /* MainTabview.swift */; };
 		869F89372A732DE5003CC3CA /* MultiSegmentPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */; };
-		869F89392A732DE5003CC3CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89382A732DE5003CC3CA /* ContentView.swift */; };
 		869F893B2A732DE6003CC3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893A2A732DE6003CC3CA /* Assets.xcassets */; };
 		869F893E2A732DE6003CC3CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */; };
 		869F89452A732DFF003CC3CA /* MultiSegmentPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */; };
@@ -166,7 +165,6 @@
 		8692572F2A7A143300944506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSegmentPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayer.swift; sourceTree = "<group>"; };
-		869F89382A732DE5003CC3CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		869F893A2A732DE6003CC3CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayerView.swift; sourceTree = "<group>"; };
@@ -329,6 +327,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03A5D0C22A900F21001E6478 /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				86B0F7B22A738D7300774C06 /* Extensions.swift */,
+				86B0F7B42A738D7F00774C06 /* Macros.swift */,
+			);
+			path = Extras;
+			sourceTree = "<group>";
+		};
+		03A5D0C32A900F33001E6478 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8692572D2A7739C100944506 /* MainTabview.swift */,
+				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
+				86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		03A5D0C42A900F49001E6478 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				86B0F7B02A738D6600774C06 /* AccountModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		869F892A2A732DE5003CC3CA = {
 			isa = PBXGroup;
 			children = (
@@ -349,13 +374,9 @@
 			isa = PBXGroup;
 			children = (
 				869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */,
-				8692572D2A7739C100944506 /* MainTabview.swift */,
-				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
-				86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */,
-				86B0F7B02A738D6600774C06 /* AccountModel.swift */,
-				86B0F7B22A738D7300774C06 /* Extensions.swift */,
-				86B0F7B42A738D7F00774C06 /* Macros.swift */,
-				869F89382A732DE5003CC3CA /* ContentView.swift */,
+				03A5D0C32A900F33001E6478 /* Views */,
+				03A5D0C42A900F49001E6478 /* ViewModels */,
+				03A5D0C22A900F21001E6478 /* Extras */,
 				86B0F7A52A738AB100774C06 /* Audio Files */,
 				869F893A2A732DE6003CC3CA /* Assets.xcassets */,
 				8692572F2A7A143300944506 /* Info.plist */,
@@ -716,7 +737,6 @@
 				869F8A042A732F90003CC3CA /* HighShelfFilter.swift in Sources */,
 				869F89D22A732F6C003CC3CA /* MIDIFileTempoTrack.swift in Sources */,
 				869F89A12A732F5F003CC3CA /* MIDINoteData.swift in Sources */,
-				869F89392A732DE5003CC3CA /* ContentView.swift in Sources */,
 				869F89872A732F53003CC3CA /* AVAudioTimeShim.swift in Sources */,
 				869F89E22A732F75003CC3CA /* BPM+StatisticalTools.swift in Sources */,
 				869F89E52A732F75003CC3CA /* MIDIHelper.swift in Sources */,
