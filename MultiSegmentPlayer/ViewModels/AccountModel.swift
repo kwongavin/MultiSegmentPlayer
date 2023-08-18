@@ -11,45 +11,18 @@ class AccountModel: ObservableObject {
     
     // Track names, user can add-subtract this values at any time.
     @Published var tracks: [String] = ["Hey Jude", "Yesterday", "Come Together"]
-    @Published var sections: [SectionInfo] = [] {
-        didSet {
-            createSegments()
-        }
-    }
-    @Published var segments: [MockSegment] = [] {
-        didSet {
-            setEndTime()
-        }
-    }
+    @Published var sections: [SectionInfo] = [] { didSet { createSegments() } }
     
+    
+    // For Audio Player
+    @Published var segments: [MockSegment] = [] { didSet { setEndTime() }}
     
     @Published var endTime: TimeInterval = 0
     @Published var _timeStamp: TimeInterval = 0
-    @Published var isPlaying: Bool = false {
-        didSet {
-            if !isPlaying {
-                engine.stop()
-                startAudioEngine() // this is temporary solution, should be player.stop()
-                _timeStamp = 0
-                // Stop accessing the security-scoped resource for all segments
-                for segment in segments {
-                    segment.audioFileURL.stopAccessingSecurityScopedResource()
-                }
-            } else {
-                timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
-                // Start accessing the security-scoped resource for all segments
-                for segment in segments {
-                    _ = segment.audioFileURL.startAccessingSecurityScopedResource()
-                }
-                player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
-            }
-        }
-    }
-    
+    @Published var isPlaying: Bool = false { didSet { isPlayingDidSet() } }
     
     let engine = AudioEngine()
     let player = MultiSegmentAudioPlayer()
-    
     
     var timer: Timer!
     var timePrevious: TimeInterval = .init(DispatchTime.now().uptimeNanoseconds) / 1_000_000_000
@@ -156,6 +129,28 @@ extension AccountModel {
         
         self.segments = newSegments
     }
+    
+    private func isPlayingDidSet() {
+        
+        if !isPlaying {
+            engine.stop()
+            startAudioEngine() // this is temporary solution, should be player.stop()
+            _timeStamp = 0
+            // Stop accessing the security-scoped resource for all segments
+            for segment in segments {
+                segment.audioFileURL.stopAccessingSecurityScopedResource()
+            }
+        } else {
+            timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
+            // Start accessing the security-scoped resource for all segments
+            for segment in segments {
+                _ = segment.audioFileURL.startAccessingSecurityScopedResource()
+            }
+            player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
+        }
+        
+    }
+
 
     @objc func checkTime() {
         if isPlaying {
