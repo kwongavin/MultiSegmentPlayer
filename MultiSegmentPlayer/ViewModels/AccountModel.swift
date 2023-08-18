@@ -22,7 +22,115 @@ class AccountModel: ObservableObject {
         }
     }
     
+    
+    @Published var endTime: TimeInterval = 0
+    @Published var _timeStamp: TimeInterval = 0
+    @Published var isPlaying: Bool = false {
+        didSet {
+            if !isPlaying {
+                engine.stop()
+                startAudioEngine() // this is temporary solution, should be player.stop()
+                _timeStamp = 0
+                // Stop accessing the security-scoped resource for all segments
+                for segment in segments {
+                    segment.audioFileURL.stopAccessingSecurityScopedResource()
+                }
+            } else {
+                timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
+                // Start accessing the security-scoped resource for all segments
+                for segment in segments {
+                    _ = segment.audioFileURL.startAccessingSecurityScopedResource()
+                }
+                player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
+            }
+        }
+    }
+    
+    
+    let engine = AudioEngine()
+    let player = MultiSegmentAudioPlayer()
+    
+    
+    var timer: Timer!
+    var timePrevious: TimeInterval = .init(DispatchTime.now().uptimeNanoseconds) / 1_000_000_000
+    var timeStamp: TimeInterval {
+        get {
+            return _timeStamp
+        }
+        set {
+            _timeStamp = newValue.clamped(to: 0 ... endTime)
+
+            if newValue > endTime {
+                isPlaying = false
+                _timeStamp = 0
+            }
+        }
+    }
+    var rmsFramesPerSecond: Double = 15
+    var pixelsPerRMS: Double = 1
+    
+    
+    init() {
+        setEndTime()
+        setAudioSessionCategoriesWithOptions()
+        routeAudioToOutput()
+        startAudioEngine()
+        timer = Timer.scheduledTimer(timeInterval: 0.05,
+                                     target: self,
+                                     selector: #selector(checkTime),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+
+}
+
+// MARK: - Initial Functions
+// MARK: -
+extension AccountModel {
+    
+    func setEndTime() {
+        if segments.count == 0 {
+            endTime = 0.0
+        } else {
+            endTime = segments[segments.count - 1].playbackEndTime
+        }
+    }
+    
+    func setAudioSessionCategoriesWithOptions() {
+        do {
+            try Settings.session.setCategory(.playAndRecord,
+                                             options: [.defaultToSpeaker,
+                                                       .mixWithOthers,
+                                                       .allowBluetooth,
+                                                       .allowBluetoothA2DP,
+                                                       .allowAirPlay])
+            try Settings.session.setActive(true)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+    
+    func routeAudioToOutput() {
+        engine.output = player
+    }
+    
+    func startAudioEngine() {
+        do {
+            try engine.start()
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+    
+}
+
+
+// MARK: - Helper Functions
+// MARK: -
+extension AccountModel {
+    
     func createSegments() {
+        
         var newSegments: [MockSegment] = []
         
         for section in sections {
@@ -48,74 +156,6 @@ class AccountModel: ObservableObject {
         
         self.segments = newSegments
     }
-    
-    // Moving MultiSegmentPlayerConductor class to here to merge data
-    
-    let engine = AudioEngine()
-    let player = MultiSegmentAudioPlayer()
-    
-    var timer: Timer!
-    var timePrevious: TimeInterval = .init(DispatchTime.now().uptimeNanoseconds) / 1_000_000_000
-    @Published var endTime: TimeInterval = 0
-
-    @Published var _timeStamp: TimeInterval = 0
-    var timeStamp: TimeInterval {
-        get {
-            return _timeStamp
-        }
-        set {
-            _timeStamp = newValue.clamped(to: 0 ... endTime)
-
-            if newValue > endTime {
-                isPlaying = false
-                _timeStamp = 0
-            }
-        }
-    }
-
-    var rmsFramesPerSecond: Double = 15
-    var pixelsPerRMS: Double = 1
-    
-    @Published var isPlaying: Bool = false {
-        didSet {
-            if !isPlaying {
-                engine.stop()
-                startAudioEngine() // this is temporary solution, should be player.stop()
-                _timeStamp = 0
-                // Stop accessing the security-scoped resource for all segments
-                for segment in segments {
-                    segment.audioFileURL.stopAccessingSecurityScopedResource()
-                }
-            } else {
-                timePrevious = TimeInterval(DispatchTime.now().uptimeNanoseconds) * 1_000_000_000
-                // Start accessing the security-scoped resource for all segments
-                for segment in segments {
-                    _ = segment.audioFileURL.startAccessingSecurityScopedResource()
-                }
-                player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
-            }
-        }
-    }
-    
-    init() {
-        setEndTime()
-        setAudioSessionCategoriesWithOptions()
-        routeAudioToOutput()
-        startAudioEngine()
-        timer = Timer.scheduledTimer(timeInterval: 0.05,
-                                     target: self,
-                                     selector: #selector(checkTime),
-                                     userInfo: nil,
-                                     repeats: true)
-    }
-    
-    func setEndTime() {
-        if segments.count == 0 {
-            endTime = 0.0
-        } else {
-            endTime = segments[segments.count - 1].playbackEndTime
-        }
-    }
 
     @objc func checkTime() {
         if isPlaying {
@@ -124,31 +164,5 @@ class AccountModel: ObservableObject {
             timePrevious = timeNow
         }
     }
-
-    func setAudioSessionCategoriesWithOptions() {
-        do {
-            try Settings.session.setCategory(.playAndRecord,
-                                             options: [.defaultToSpeaker,
-                                                       .mixWithOthers,
-                                                       .allowBluetooth,
-                                                       .allowBluetoothA2DP,
-                                                       .allowAirPlay])
-            try Settings.session.setActive(true)
-        } catch {
-            assertionFailure(error.localizedDescription)
-        }
-    }
-
-    func routeAudioToOutput() {
-        engine.output = player
-    }
-
-    func startAudioEngine() {
-        do {
-            try engine.start()
-        } catch {
-            assertionFailure(error.localizedDescription)
-        }
-    }
-
+    
 }
