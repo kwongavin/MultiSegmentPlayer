@@ -25,10 +25,6 @@ struct SectionInfo: Identifiable, Equatable, Codable {
 struct AudioTrackView: View {
     
     @EnvironmentObject var accountModel: AccountModel
-//    @ObservedObject var conductor = MultiSegmentPlayerConductor()
-    
-    // This array already exists as String array of song titles
-//    @State var tracks = ["test1", "test2"]
     
     // This array will save the newly downloaded audio file names
     @State var audioFiles: [String] = []
@@ -48,13 +44,6 @@ struct AudioTrackView: View {
     // Error messages
     @State private var errorMessage: String?
     
-//    @State private var sections: [SectionInfo] = []
-//    [
-//        SectionInfo(title: "Song 1"),
-//        SectionInfo(title: "Song 2"),
-//        SectionInfo(title: "Song 3"),
-//        SectionInfo(title: "Song 4")
-//    ]
     
     @State private var isOnAppearCalled = false // for calling on appear only once
     

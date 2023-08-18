@@ -151,7 +151,6 @@ extension AccountModel {
         
     }
 
-
     @objc func checkTime() {
         if isPlaying {
             let timeNow = TimeInterval(DispatchTime.now().uptimeNanoseconds) / 1_000_000_000
