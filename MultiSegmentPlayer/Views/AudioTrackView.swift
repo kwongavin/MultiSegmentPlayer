@@ -150,6 +150,7 @@ extension AudioTrackView {
             print(fileURLs)
         }
         .dropDestination(for: String.self) { values, _ in
+            // main list of audio files at the top
             guard let receivedItem = values.first else { return true }
             removeFromAllSections(itemToRemove: receivedItem)
             audioFiles.append(receivedItem)
@@ -399,6 +400,7 @@ extension AudioTrackView {
                             sectionInfo.wrappedValue.tracks[newIndex].url = url
                         }
                         
+                        accountModel.createSegments()
                         printOnDebug(sectionInfo.wrappedValue)
                         
                         return true
@@ -424,6 +426,7 @@ extension AudioTrackView {
             }
             
             sectionInfo.wrappedValue.tracks.append(track)
+            accountModel.createSegments()
             
             return true
         }
