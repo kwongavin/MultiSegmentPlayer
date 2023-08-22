@@ -18,51 +18,35 @@ struct CustomPlayerView: View {
         
         VStack {
             
-            ZStack(alignment: .leading) {
-                TrackView(segments: model.segments,
-                          rmsFramesPerSecond: model.rmsFramesPerSecond,
-                          pixelsPerRMS: model.pixelsPerRMS)
-
-                Rectangle()
-                    .fill(.red)
-                    .frame(width: playheadWidth)
-                    .offset(x: currentPlayPosition())
-            }
-            .frame(height: 100)
-            .padding()
-
+            PlayerTimeView()
             
-            VStack {
+            HStack(spacing: geo.size.width*0.08) {
                 
-                HStack(spacing: geo.size.width*0.08) {
-                    
-                    //-------------------------------------------------- Back
-                    
-                    BackwardButtonView()
-                    
-                    
-                    //-------------------------------------------------- Play/pause
-                    
-                    PlayPauseButtonView()
-                    
-                    
-                    //-------------------------------------------------- Forward
-                    
-                    ForwardButtonView()
-
-                }
+                //-------------------------------------------------- Back
                 
-                //-------------------------------------------------- Time
+                BackwardButtonView()
                 
-                Text(currentTimeText())
-                    .foregroundColor(.white)
+                
+                //-------------------------------------------------- Play/pause
+                
+                PlayPauseButtonView()
+                
+                
+                //-------------------------------------------------- Forward
+                
+                ForwardButtonView()
                 
             }
-            .frame(maxWidth: .greatestFiniteMagnitude)
-            .background(BackgroundRectangleView())
-
-            Spacer()
+            
+            //-------------------------------------------------- Time
+            
+            Text(currentTimeText())
+                .foregroundColor(.white)
+            
         }
+        .frame(maxWidth: .greatestFiniteMagnitude)
+        .background(BackgroundRectangleView())
+        
     }
 
 
@@ -72,11 +56,48 @@ struct CustomPlayerView: View {
 // MARK: -
 extension CustomPlayerView {
     
+    private func PlayerTimeView() -> some View {
+        
+        ZStack(alignment: .leading) {
+            
+            TrackView(segments: model.segments,
+                      rmsFramesPerSecond: model.rmsFramesPerSecond,
+                      pixelsPerRMS: model.pixelsPerRMS)
+            .background(Color.gray)
+            .cornerRadius(4)
+
+            Rectangle()
+                .fill(.blue)
+                .frame(width: playheadWidth)
+                .offset(x: currentPlayPosition())
+            
+        }
+        .frame(height: 20)
+        .padding(.horizontal)
+    }
+    
+    private func BackwardButtonView() -> some View {
+        
+        Button(action: {
+            if model.titleDisplayIndex > 0 {
+                model.titleDisplayIndex -= 1
+            } else {
+                model.titleDisplayIndex = model.tracks.count - 1
+            }
+        }, label: {
+            Image(systemName: "backward.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: geo.size.width*0.12)
+                .foregroundColor(.white)
+        })
+        
+    }
+    
     private func PlayPauseButtonView() -> some View {
         
         Button(action: {
             model.isPlaying.toggle()
-            //model.createSegments()
         }, label: {
             Image(systemName: model.isPlaying ? "pause.circle.fill" : "play.circle.fill")
                 .resizable()
@@ -101,28 +122,10 @@ extension CustomPlayerView {
         
     }
     
-    private func BackwardButtonView() -> some View {
-        
-        Button(action: {
-            if model.titleDisplayIndex > 0 {
-                model.titleDisplayIndex -= 1
-            } else {
-                model.titleDisplayIndex = model.tracks.count - 1
-            }
-        }, label: {
-            Image(systemName: "backward.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: geo.size.width*0.12)
-                .foregroundColor(.white)
-        })
-        
-    }
-    
     private func BackgroundRectangleView() -> some View {
         
         Rectangle()
-            .frame(height: geo.size.height*0.17)
+            .frame(height: geo.size.height*0.22)
             .cornerRadius(15)
             .shadow(color: Color("shadowColor"), radius: 10)
             .foregroundColor(Color("selectedColor"))
