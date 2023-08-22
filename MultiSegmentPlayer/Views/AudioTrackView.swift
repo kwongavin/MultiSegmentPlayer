@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AudioTrackView: View {
     
-    @StateObject var accountModel = AccountModel()
+    @StateObject var model = MainModel()
     
     // This array will save the newly downloaded audio file names
     @State var audioFiles: [String] = []
@@ -65,21 +65,21 @@ struct AudioTrackView: View {
             
             var sec: [SectionInfo] = []
             
-            for track in accountModel.tracks {
+            for track in model.tracks {
                 sec.append(SectionInfo(title: track))
             }
             
-            accountModel.sections = sec
+            model.sections = sec
 
         })
-        .onChange(of: accountModel.tracks) { newValue in
+        .onChange(of: model.tracks) { newValue in
             var sec: [SectionInfo] = []
             
-            for track in accountModel.tracks {
+            for track in model.tracks {
                 sec.append(SectionInfo(title: track))
             }
             
-            accountModel.sections = sec
+            model.sections = sec
         }
     }
     
@@ -286,7 +286,7 @@ extension AudioTrackView {
             
             VStack {
                 
-                ForEach($accountModel.sections) { sectionInfo in
+                ForEach($model.sections) { sectionInfo in
                                         
                     VStack {
                         
@@ -382,7 +382,7 @@ extension AudioTrackView {
                             sectionInfo.wrappedValue.tracks[newIndex].url = url
                         }
                         
-                        accountModel.createSegments()
+                        model.createSegments()
                         printOnDebug(sectionInfo.wrappedValue)
                         
                         return true
@@ -408,7 +408,7 @@ extension AudioTrackView {
             }
             
             sectionInfo.wrappedValue.tracks.append(track)
-            accountModel.createSegments()
+            model.createSegments()
             
             return true
         }
@@ -487,14 +487,14 @@ extension AudioTrackView {
             HStack {
                 Text("AUDIO PLAYER")
                 Spacer()
-                if accountModel.isPlayerOn {
-                    Text("::: \(accountModel.tracks[accountModel.titleDisplayIndex])")
+                if model.isPlayerOn {
+                    Text("::: \(model.tracks[model.titleDisplayIndex])")
                 }
             }
             .font(Font.custom("Futura Medium", size: geo.size.width*0.04))
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            CustomPlayerView(accountModel: accountModel, geo: geo)
+            CustomPlayerView(model: model, geo: geo)
             
         }
         .padding()
@@ -574,23 +574,23 @@ extension AudioTrackView {
     private func removeFromAllSections(itemToRemove: String) {
         
         // looping through index of every section
-        for sectionIndex in 0 ..< accountModel.sections.count {
+        for sectionIndex in 0 ..< model.sections.count {
             
             // looping through index of every track
-            for trackIndex in 0 ..< accountModel.sections[sectionIndex].tracks.count {
+            for trackIndex in 0 ..< model.sections[sectionIndex].tracks.count {
                 
                 // remove selected track
-                if itemToRemove == accountModel.sections[sectionIndex].selectedTrack {
-                    accountModel.sections[sectionIndex].selectedTrack = ""
+                if itemToRemove == model.sections[sectionIndex].selectedTrack {
+                    model.sections[sectionIndex].selectedTrack = ""
                 }
                 
                 // remove all items matching the name of the song to remove
-                accountModel.sections[sectionIndex].tracks[trackIndex].items.removeAll(where: { $0 == itemToRemove } )
+                model.sections[sectionIndex].tracks[trackIndex].items.removeAll(where: { $0 == itemToRemove } )
                 
             }
             
             // remove the tracks which have empty tracks
-            accountModel.sections[sectionIndex].tracks.removeAll(where: {$0.items.count == 0})
+            model.sections[sectionIndex].tracks.removeAll(where: {$0.items.count == 0})
             
         }
         
@@ -607,6 +607,6 @@ extension AudioTrackView {
 struct AudioTrackView_Previews: PreviewProvider {
     static var previews: some View {
         AudioTrackView()
-            .environmentObject(AccountModel())
+            .environmentObject(MainModel())
     }
 }

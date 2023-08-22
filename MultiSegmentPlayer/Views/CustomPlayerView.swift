@@ -9,17 +9,17 @@ import SwiftUI
 
 struct CustomPlayerView: View {
     
-    @ObservedObject var accountModel: AccountModel
+    @ObservedObject var model: MainModel
 
     var currentTimeText: String {
-        let currentTime = String(format: "%.1f", accountModel.timeStamp)
-        let endTime = String(format: "%.1f", accountModel.endTime)
+        let currentTime = String(format: "%.1f", model.timeStamp)
+        let endTime = String(format: "%.1f", model.endTime)
         return currentTime + " of " + endTime
     }
 
     var currentPlayPosition: CGFloat {
-        let pixelsPerSecond = accountModel.pixelsPerRMS * accountModel.rmsFramesPerSecond
-        return accountModel.timeStamp * pixelsPerSecond - playheadWidth
+        let pixelsPerSecond = model.pixelsPerRMS * model.rmsFramesPerSecond
+        return model.timeStamp * pixelsPerSecond - playheadWidth
     }
 
     let playheadWidth: CGFloat = 2
@@ -30,9 +30,9 @@ struct CustomPlayerView: View {
         VStack {
             
             ZStack(alignment: .leading) {
-                TrackView(segments: accountModel.segments,
-                          rmsFramesPerSecond: accountModel.rmsFramesPerSecond,
-                          pixelsPerRMS: accountModel.pixelsPerRMS)
+                TrackView(segments: model.segments,
+                          rmsFramesPerSecond: model.rmsFramesPerSecond,
+                          pixelsPerRMS: model.pixelsPerRMS)
 
                 Rectangle()
                     .fill(.red)
@@ -62,10 +62,10 @@ struct CustomPlayerView: View {
                 
                 HStack(spacing: geo.size.width*0.08) {
                     Button(action: {
-                        if accountModel.titleDisplayIndex > 0 {
-                            accountModel.titleDisplayIndex -= 1
+                        if model.titleDisplayIndex > 0 {
+                            model.titleDisplayIndex -= 1
                         } else {
-                            accountModel.titleDisplayIndex = accountModel.tracks.count - 1
+                            model.titleDisplayIndex = model.tracks.count - 1
                         }
                     }, label: {
                         Image(systemName: "backward.fill")
@@ -76,10 +76,10 @@ struct CustomPlayerView: View {
                     })
                     
                     Button(action: {
-                        accountModel.isPlayerOn.toggle()
-                        accountModel.createSegments()
+                        model.isPlayerOn.toggle()
+                        model.createSegments()
                     }, label: {
-                        Image(systemName: accountModel.isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
+                        Image(systemName: model.isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: geo.size.width*0.17)
@@ -87,7 +87,7 @@ struct CustomPlayerView: View {
                     })
                     
                     Button(action: {
-                        accountModel.titleDisplayIndex = (accountModel.titleDisplayIndex + 1) % accountModel.tracks.count
+                        model.titleDisplayIndex = (model.titleDisplayIndex + 1) % model.tracks.count
                     }, label: {
                         Image(systemName: "forward.fill")
                             .resizable()
@@ -107,7 +107,7 @@ struct CustomPlayerView: View {
             
             
             
-            PlayPauseView(isPlaying: $accountModel.isPlaying, accountModel: accountModel).frame(height: 30)
+            PlayPauseView(isPlaying: $model.isPlaying, model: model).frame(height: 30)
 
             Text(currentTimeText)
                 .padding(.top)
@@ -118,7 +118,7 @@ struct CustomPlayerView: View {
 
     struct PlayPauseView: View {
         @Binding var isPlaying: Bool
-        @ObservedObject var accountModel: AccountModel
+        @ObservedObject var model: MainModel
 
         var body: some View {
             Image(systemName: !isPlaying ? "play" : "pause")

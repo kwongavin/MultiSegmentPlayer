@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AccountModel: ObservableObject {
+class MainModel: ObservableObject {
     
     // Track names, user can add-subtract this values at any time.
     @Published var tracks: [String] = ["Hey Jude", "Yesterday", "Come Together"]
@@ -62,7 +62,7 @@ class AccountModel: ObservableObject {
 
 // MARK: - Initial Functions
 // MARK: -
-extension AccountModel {
+extension MainModel {
     
     func setEndTime() {
         if segments.count == 0 {
@@ -103,7 +103,7 @@ extension AccountModel {
 
 // MARK: - Helper Functions
 // MARK: -
-extension AccountModel {
+extension MainModel {
     
     func createSegments() {
         

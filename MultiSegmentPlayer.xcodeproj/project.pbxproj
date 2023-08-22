@@ -155,7 +155,7 @@
 		86B0F7AC2A738AED00774C06 /* FirstSong_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86B0F7A82A738AED00774C06 /* FirstSong_1.mp3 */; };
 		86B0F7AD2A738AED00774C06 /* FirstSong_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86B0F7A92A738AED00774C06 /* FirstSong_3.mp3 */; };
 		86B0F7AF2A738D4B00774C06 /* AudioTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */; };
-		86B0F7B12A738D6600774C06 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B02A738D6600774C06 /* AccountModel.swift */; };
+		86B0F7B12A738D6600774C06 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B02A738D6600774C06 /* MainModel.swift */; };
 		86B0F7B32A738D7300774C06 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B22A738D7300774C06 /* Extensions.swift */; };
 		86B0F7B52A738D7F00774C06 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7B42A738D7F00774C06 /* Macros.swift */; };
 /* End PBXBuildFile section */
@@ -311,7 +311,7 @@
 		86B0F7A82A738AED00774C06 /* FirstSong_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FirstSong_1.mp3; sourceTree = "<group>"; };
 		86B0F7A92A738AED00774C06 /* FirstSong_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FirstSong_3.mp3; sourceTree = "<group>"; };
 		86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrackView.swift; sourceTree = "<group>"; };
-		86B0F7B02A738D6600774C06 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		86B0F7B02A738D6600774C06 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		86B0F7B22A738D7300774C06 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		86B0F7B42A738D7F00774C06 /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -348,7 +348,7 @@
 		03A5D0C42A900F49001E6478 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				86B0F7B02A738D6600774C06 /* AccountModel.swift */,
+				86B0F7B02A738D6600774C06 /* MainModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -731,7 +731,7 @@
 				869F895C2A732F25003CC3CA /* FormatConverter+Compressed.swift in Sources */,
 				869F89B42A732F64003CC3CA /* MIDIControl.swift in Sources */,
 				869F895D2A732F25003CC3CA /* FormatConverter.swift in Sources */,
-				86B0F7B12A738D6600774C06 /* AccountModel.swift in Sources */,
+				86B0F7B12A738D6600774C06 /* MainModel.swift in Sources */,
 				869F89C12A732F68003CC3CA /* MIDISystemRealTimeObserver.swift in Sources */,
 				869F89BE2A732F68003CC3CA /* MIDIClockListener.swift in Sources */,
 				869F8A302A732FAF003CC3CA /* AudioPlayer+Legacy.swift in Sources */,
