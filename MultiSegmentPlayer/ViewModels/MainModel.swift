@@ -13,8 +13,6 @@ class MainModel: ObservableObject {
     @Published var tracks: [String] = ["Hey Jude", "Yesterday", "Come Together"]
     @Published var sections: [SectionInfo] = [] { didSet { createSegments() } }
     @Published var titleDisplayIndex = 0
-    @Published var isPlayerOn = false // Audio Player on/off button
-
     
     
     // For Audio Player

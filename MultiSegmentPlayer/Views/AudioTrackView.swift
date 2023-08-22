@@ -487,7 +487,7 @@ extension AudioTrackView {
             HStack {
                 Text("AUDIO PLAYER")
                 Spacer()
-                if model.isPlayerOn {
+                if model.isPlaying {
                     Text("::: \(model.tracks[model.titleDisplayIndex])")
                 }
             }
