@@ -13,7 +13,7 @@ struct MainTabview: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            MultiSegmentPlayerView()
+            CustomPlayerView()
                 .tabItem {
                     VStack {
                         Image(systemName: "house.circle")

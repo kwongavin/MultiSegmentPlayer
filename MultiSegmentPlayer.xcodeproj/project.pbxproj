@@ -11,7 +11,7 @@
 		869F89372A732DE5003CC3CA /* MultiSegmentPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */; };
 		869F893B2A732DE6003CC3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893A2A732DE6003CC3CA /* Assets.xcassets */; };
 		869F893E2A732DE6003CC3CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */; };
-		869F89452A732DFF003CC3CA /* MultiSegmentPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */; };
+		869F89452A732DFF003CC3CA /* CustomPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89442A732DFF003CC3CA /* CustomPlayerView.swift */; };
 		869F89472A732E58003CC3CA /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89462A732E58003CC3CA /* AudioEngine.swift */; };
 		869F89492A732E89003CC3CA /* AudioKitHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89482A732E89003CC3CA /* AudioKitHelpers.swift */; };
 		869F894D2A732EE6003CC3CA /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F894C2A732EE6003CC3CA /* Log.swift */; };
@@ -167,7 +167,7 @@
 		869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayer.swift; sourceTree = "<group>"; };
 		869F893A2A732DE6003CC3CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayerView.swift; sourceTree = "<group>"; };
+		869F89442A732DFF003CC3CA /* CustomPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerView.swift; sourceTree = "<group>"; };
 		869F89462A732E58003CC3CA /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		869F89482A732E89003CC3CA /* AudioKitHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioKitHelpers.swift; sourceTree = "<group>"; };
 		869F894C2A732EE6003CC3CA /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -340,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				8692572D2A7739C100944506 /* MainTabview.swift */,
-				869F89442A732DFF003CC3CA /* MultiSegmentPlayerView.swift */,
 				86B0F7AE2A738D4B00774C06 /* AudioTrackView.swift */,
+				869F89442A732DFF003CC3CA /* CustomPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -636,7 +636,7 @@
 				869F8A1F2A732FA1003CC3CA /* NodeStatus.swift in Sources */,
 				869F8A592A732FDB003CC3CA /* AmplitudeTap.swift in Sources */,
 				869F8A212A732FA1003CC3CA /* NodeParameter.swift in Sources */,
-				869F89452A732DFF003CC3CA /* MultiSegmentPlayerView.swift in Sources */,
+				869F89452A732DFF003CC3CA /* CustomPlayerView.swift in Sources */,
 				869F89FA2A732F8C003CC3CA /* PeakLimiter.swift in Sources */,
 				869F89632A732F2E003CC3CA /* AudioUnit+Helpers.swift in Sources */,
 				869F8A282A732FAA003CC3CA /* AppleSampler.swift in Sources */,
