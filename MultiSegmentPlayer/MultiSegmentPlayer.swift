@@ -11,8 +11,7 @@ import SwiftUI
 struct NewCrazyThingThatWontWorkApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabview()
-                .environmentObject(AccountModel())
+            AudioTrackView()
         }
     }
 }

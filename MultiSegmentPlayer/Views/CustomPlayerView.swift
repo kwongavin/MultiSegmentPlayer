@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CustomPlayerView: View {
-//    @ObservedObject var conductor = MultiSegmentPlayerConductor()
-    @EnvironmentObject var accountModel: AccountModel
+    
+    @ObservedObject var accountModel: AccountModel
 
     var currentTimeText: String {
         let currentTime = String(format: "%.1f", accountModel.timeStamp)
@@ -23,9 +23,12 @@ struct CustomPlayerView: View {
     }
 
     let playheadWidth: CGFloat = 2
+    
+    var geo: GeometryProxy
 
     var body: some View {
         VStack {
+            
             ZStack(alignment: .leading) {
                 TrackView(segments: accountModel.segments,
                           rmsFramesPerSecond: accountModel.rmsFramesPerSecond,
@@ -39,6 +42,71 @@ struct CustomPlayerView: View {
             .frame(height: 200)
             .padding()
 
+            
+            ///////////////////////////////////////////////////////////////
+            ///
+            ///
+            ///
+            ///
+            ///
+            ///
+            
+            ZStack {
+                
+                Rectangle()
+                    .frame(height: geo.size.height*0.15)
+                    .cornerRadius(15)
+                    .shadow(color: Color("shadowColor"), radius: 10)
+                    .foregroundColor(Color("selectedColor"))
+                    .opacity(0.8)
+                
+                HStack(spacing: geo.size.width*0.08) {
+                    Button(action: {
+                        if accountModel.titleDisplayIndex > 0 {
+                            accountModel.titleDisplayIndex -= 1
+                        } else {
+                            accountModel.titleDisplayIndex = accountModel.tracks.count - 1
+                        }
+                    }, label: {
+                        Image(systemName: "backward.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: geo.size.width*0.12)
+                            .foregroundColor(.white)
+                    })
+                    
+                    Button(action: {
+                        accountModel.isPlayerOn.toggle()
+                        accountModel.createSegments()
+                    }, label: {
+                        Image(systemName: accountModel.isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: geo.size.width*0.17)
+                            .foregroundColor(.white)
+                    })
+                    
+                    Button(action: {
+                        accountModel.titleDisplayIndex = (accountModel.titleDisplayIndex + 1) % accountModel.tracks.count
+                    }, label: {
+                        Image(systemName: "forward.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: geo.size.width*0.12)
+                            .foregroundColor(.white)
+                    })
+                }
+            }
+            
+            
+            
+            
+            /////////////////////////////////////////////////////////////////
+            
+            
+            
+            
+            
             PlayPauseView(isPlaying: $accountModel.isPlaying, accountModel: accountModel).frame(height: 30)
 
             Text(currentTimeText)
@@ -64,9 +132,9 @@ struct CustomPlayerView: View {
 }
 
 
-struct MultiSegmentPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomPlayerView()
-            .environmentObject(AccountModel())
-    }
-}
+//struct MultiSegmentPlayerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CustomPlayerView(accountModel: AccountModel(), geo: GeometryProxy())
+//            .environmentObject(AccountModel())
+//    }
+//}

@@ -7,24 +7,9 @@
 
 import SwiftUI
 
-struct SectionInfo: Identifiable, Equatable, Codable {
-    
-    var id = UUID().uuidString
-    var title: String
-    var tracks: [Track] = []
-    var selectedTrack: String?
-    
-    struct Track: Identifiable, Equatable, Codable {
-        var id = UUID().uuidString
-        var items: [String] = []
-        var url: URL?
-    }
-    
-}
-
 struct AudioTrackView: View {
     
-    @EnvironmentObject var accountModel: AccountModel
+    @StateObject var accountModel = AccountModel()
     
     // This array will save the newly downloaded audio file names
     @State var audioFiles: [String] = []
@@ -35,8 +20,7 @@ struct AudioTrackView: View {
     // This variable will trigger fileImport modifier
     @State var openFiles = false
     
-    // Audio Player on/off button
-    @State private var isPlayerOn = false
+
     
     // Show/Hide third row
     @State private var showThirdRow = false
@@ -46,9 +30,7 @@ struct AudioTrackView: View {
     
     
     @State private var isOnAppearCalled = false // for calling on appear only once
-    
-    @State private var titleDisplayIndex = 0
-    
+        
     var body: some View {
         
         GeometryReader { geo in
@@ -497,64 +479,23 @@ extension AudioTrackView {
 extension AudioTrackView {
     
     private func AudioPlayerView(geo: GeometryProxy) -> some View {
+        
         Group {
+            
             Divider()
             
             HStack {
                 Text("AUDIO PLAYER")
                 Spacer()
-                if isPlayerOn {
-                    Text("::: \(accountModel.tracks[titleDisplayIndex])")
+                if accountModel.isPlayerOn {
+                    Text("::: \(accountModel.tracks[accountModel.titleDisplayIndex])")
                 }
             }
             .font(Font.custom("Futura Medium", size: geo.size.width*0.04))
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            ZStack {
-                Rectangle()
-                    .frame(height: geo.size.height*0.15)
-                    .cornerRadius(15)
-                    .shadow(color: Color("shadowColor"), radius: 10)
-                    .foregroundColor(Color("selectedColor"))
-                    .opacity(0.8)
-                
-                HStack(spacing: geo.size.width*0.08) {
-                    Button(action: {
-                        if titleDisplayIndex > 0 {
-                            titleDisplayIndex -= 1
-                        } else {
-                            titleDisplayIndex = accountModel.tracks.count - 1
-                        }
-                    }, label: {
-                        Image(systemName: "backward.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geo.size.width*0.12)
-                            .foregroundColor(.white)
-                    })
-                    
-                    Button(action: {
-                        isPlayerOn.toggle()
-                        accountModel.createSegments()
-                    }, label: {
-                        Image(systemName: isPlayerOn ? "pause.circle.fill" : "play.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geo.size.width*0.17)
-                            .foregroundColor(.white)
-                    })
-                    
-                    Button(action: {
-                        titleDisplayIndex = (titleDisplayIndex + 1) % accountModel.tracks.count
-                    }, label: {
-                        Image(systemName: "forward.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: geo.size.width*0.12)
-                            .foregroundColor(.white)
-                    })
-                }
-            }
+            CustomPlayerView(accountModel: accountModel, geo: geo)
+            
         }
         .padding()
     }
