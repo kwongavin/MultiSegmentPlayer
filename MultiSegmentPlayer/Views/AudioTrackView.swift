@@ -20,16 +20,15 @@ struct AudioTrackView: View {
     // This variable will trigger fileImport modifier
     @State var openFiles = false
     
-
-    
     // Show/Hide third row
     @State private var showThirdRow = false
     
     // Error messages
     @State private var errorMessage: String?
     
-    
     @State private var isOnAppearCalled = false // for calling on appear only once
+    
+    @StateObject var global = GlobalModel
         
     var body: some View {
         
@@ -421,6 +420,7 @@ extension AudioTrackView {
             .frame(height: 30)
             .frame(width: geo.size.width/6.8)
             .background(Color.gray.opacity(trackTitle == sectionInfo.wrappedValue.selectedTrack ? 0.5 : 0))
+            .background(isCurrentlyPlaying(url: getUrl(trackTitle: trackTitle, tracks: sectionInfo.wrappedValue.tracks)) ? Color.pink : Color.clear)
             .background{ AudioFilesRowBackgroundView() }
             .cornerRadius(10)
             .contentShape(Rectangle())
@@ -430,6 +430,7 @@ extension AudioTrackView {
             .draggable(String(trackTitle)) {
                 DragView(title: trackTitle, geo: geo)
             }
+        
         
     }
     
@@ -558,6 +559,11 @@ extension AudioTrackView {
         return "\(index + 1)"
     }
     
+    private func getUrl(trackTitle: String, tracks: [SectionInfo.Track]) -> String {
+        let index = tracks.firstIndex(where: { $0.items.contains(trackTitle)}) ?? -1
+        return tracks[index].url?.absoluteString ?? ""
+    }
+    
     private func filesImported(result: Result<[URL], Error>) {
         
         do {
@@ -596,6 +602,27 @@ extension AudioTrackView {
         
         // remove from audio files
         audioFiles.removeAll(where: { $0 == itemToRemove })
+        
+    }
+    
+    func isCurrentlyPlaying(url: String) -> Bool {
+        
+        // check if player is playing
+        guard model.isPlaying else { return false }
+        
+        // handling for first track
+        if global.playingUrl == "first track", url == model.segments.first?.audioFileURL.absoluteString ?? "" { return true }
+        
+        // get the index of the of the file that just finished playing
+        guard let indexOfFinishedTrack = model.segments.firstIndex(where: {$0.audioFileURL.absoluteString == global.playingUrl }) else { return false }
+        
+        // index of the next track
+        let nextTrackIndex = indexOfFinishedTrack + 1
+        
+        // return if its the last track
+        guard nextTrackIndex < model.segments.count else { return false }
+        
+        return url == model.segments[nextTrackIndex].audioFileURL.absoluteString
         
     }
 
