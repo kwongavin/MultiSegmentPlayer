@@ -108,6 +108,10 @@ extension MainModel {
         var newSegments: [MockSegment] = []
         
         for section in sections {
+            
+            // check if section has tracks
+            if section.tracks.isEmpty { continue }
+            
             for track in section.tracks {
                 guard let url = track.url else { continue }
                 let didStartAccessing = url.startAccessingSecurityScopedResource()
@@ -126,6 +130,9 @@ extension MainModel {
                     print("Couldn't load file URL")
                 }
             }
+            
+            // only crete segment for the first section which has tracks
+            break
         }
         
         self.segments = newSegments
