@@ -70,6 +70,7 @@ extension CustomPlayerView {
                 .fill(.blue)
                 .frame(width: playheadWidth)
                 .offset(x: currentPlayPosition())
+                .padding(.leading, 4)
             
         }
         .frame(height: 20)

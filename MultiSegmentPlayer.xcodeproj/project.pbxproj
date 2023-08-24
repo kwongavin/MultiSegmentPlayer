@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03A5D0C82A94C628001E6478 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A5D0C72A94C628001E6478 /* SectionInfo.swift */; };
+		03A5D0CA2A97657D001E6478 /* GlobalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A5D0C92A97657D001E6478 /* GlobalModel.swift */; };
 		869F89372A732DE5003CC3CA /* MultiSegmentPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */; };
 		869F893B2A732DE6003CC3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893A2A732DE6003CC3CA /* Assets.xcassets */; };
 		869F893E2A732DE6003CC3CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869F893D2A732DE6003CC3CA /* Preview Assets.xcassets */; };
@@ -162,6 +163,7 @@
 
 /* Begin PBXFileReference section */
 		03A5D0C72A94C628001E6478 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
+		03A5D0C92A97657D001E6478 /* GlobalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalModel.swift; sourceTree = "<group>"; };
 		8692572F2A7A143300944506 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		869F89332A732DE5003CC3CA /* MultiSegmentPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSegmentPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869F89362A732DE5003CC3CA /* MultiSegmentPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSegmentPlayer.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				86B0F7B02A738D6600774C06 /* MainModel.swift */,
+				03A5D0C92A97657D001E6478 /* GlobalModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				869F89622A732F2E003CC3CA /* AudioComponentDescription+Helpers.swift in Sources */,
 				869F89C42A732F68003CC3CA /* MIDIObserverMaster.swift in Sources */,
 				869F89532A732F1D003CC3CA /* AVAudioPCMBuffer+Utilities.swift in Sources */,
+				03A5D0CA2A97657D001E6478 /* GlobalModel.swift in Sources */,
 				869F8A392A732FBB003CC3CA /* VariSpeed.swift in Sources */,
 				869F89E32A732F75003CC3CA /* MIDITimeout.swift in Sources */,
 				869F89A32A732F5F003CC3CA /* MIDIInstrument.swift in Sources */,
@@ -905,7 +909,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MultiSegmentPlayer/Preview Content\"";
-				DEVELOPMENT_TEAM = 95GVZGQJ97;
+				DEVELOPMENT_TEAM = LZKT9SHUK8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiSegmentPlayer/Info.plist;
@@ -936,7 +940,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MultiSegmentPlayer/Preview Content\"";
-				DEVELOPMENT_TEAM = 95GVZGQJ97;
+				DEVELOPMENT_TEAM = LZKT9SHUK8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MultiSegmentPlayer/Info.plist;
