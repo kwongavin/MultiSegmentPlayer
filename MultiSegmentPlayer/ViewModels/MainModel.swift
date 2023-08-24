@@ -147,6 +147,9 @@ extension MainModel {
             for segment in segments {
                 _ = segment.audioFileURL.startAccessingSecurityScopedResource()
             }
+            
+            // for highlighting the first track
+            GlobalModel.playingUrl = "first track"
             player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
         }
         
