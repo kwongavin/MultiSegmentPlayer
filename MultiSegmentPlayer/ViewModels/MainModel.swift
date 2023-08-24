@@ -113,7 +113,7 @@ extension MainModel {
             if section.tracks.isEmpty { continue }
             
             for track in section.tracks {
-                guard let url = track.url else { continue }
+                guard let url = track.items.randomElement()?.url else { continue }
                 let didStartAccessing = url.startAccessingSecurityScopedResource()
                 
                 if didStartAccessing {

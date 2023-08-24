@@ -329,8 +329,8 @@ extension AudioTrackView {
                         
                         SectionListRowView(
                             geo: geo,
-                            trackTitle: track.items[0].wrappedValue,
-                            url: track.wrappedValue.url?.absoluteString ?? "",
+                            trackTitle: track.wrappedValue.items[0].name,
+                            url: track.wrappedValue.items[0].url?.absoluteString ?? "",
                             sectionInfo: sectionInfo)
                             .frame(maxHeight: .greatestFiniteMagnitude)
                         
@@ -343,8 +343,8 @@ extension AudioTrackView {
                         if track.wrappedValue.items.count > 1 {
                             SectionListRowView(
                                 geo: geo,
-                                trackTitle: track.items[1].wrappedValue,
-                                url: track.wrappedValue.url?.absoluteString ?? "",
+                                trackTitle: track.wrappedValue.items[1].name,
+                                url: track.wrappedValue.items[1].url?.absoluteString ?? "",
                                 sectionInfo: sectionInfo)
                                 .frame(maxHeight: .greatestFiniteMagnitude)
                         }
@@ -375,12 +375,10 @@ extension AudioTrackView {
                         guard let newIndex = sectionInfo.wrappedValue.tracks.firstIndex(where: { $0.id == trackId }) else { return false }
                         
                         // add item to the drop zone index
-                        sectionInfo.wrappedValue.tracks[newIndex].items.append(receivedItem)
-                        //sectionInfo.wrappedValue.tracks[newIndex].url =
-                        
                         // save the dropped URL in the track's URL property
                         if let url = fileURLs.first(where: { $0.lastPathComponent == receivedItem }) {
-                            sectionInfo.wrappedValue.tracks[newIndex].url = url
+                            
+                            sectionInfo.wrappedValue.tracks[newIndex].items.append(SectionInfo.TrackInfo(name: receivedItem, url: url))
                         }
                         
                         model.createSegments()
@@ -401,15 +399,14 @@ extension AudioTrackView {
         .dropDestination(for: String.self) { values, _ in
             guard let item = values.first else { return true }
             removeFromAllSections(itemToRemove: item)
-            var track = SectionInfo.Track(items: [item])
             
             // save the dropped URL in the track's URL property
-            if let url = fileURLs.first(where: { $0.lastPathComponent == item }) {
-                track.url = url
+            if let fileUrl = fileURLs.first(where: { $0.lastPathComponent == item }) {
+                var track = SectionInfo.Track(items: [SectionInfo.TrackInfo(name: item, url: fileUrl)])
+                sectionInfo.wrappedValue.tracks.append(track)
+                model.createSegments()
             }
-            
-            sectionInfo.wrappedValue.tracks.append(track)
-            model.createSegments()
+
             
             return true
         }
@@ -557,7 +554,7 @@ extension AudioTrackView {
 extension AudioTrackView {
     
     private func getIndex(trackTitle: String, tracks: [SectionInfo.Track]) -> String {
-        let index = tracks.firstIndex(where: { $0.items.contains(trackTitle)}) ?? -1
+        let index = tracks.firstIndex(where: { $0.items.map({ $0.name}).contains(trackTitle)}) ?? -1
         return "\(index + 1)"
     }
     
@@ -588,7 +585,7 @@ extension AudioTrackView {
                 }
                 
                 // remove all items matching the name of the song to remove
-                model.sections[sectionIndex].tracks[trackIndex].items.removeAll(where: { $0 == itemToRemove } )
+                model.sections[sectionIndex].tracks[trackIndex].items.removeAll(where: { $0.name == itemToRemove } )
                 
             }
             
