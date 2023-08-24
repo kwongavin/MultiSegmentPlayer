@@ -330,6 +330,7 @@ extension AudioTrackView {
                         SectionListRowView(
                             geo: geo,
                             trackTitle: track.items[0].wrappedValue,
+                            url: track.wrappedValue.url?.absoluteString ?? "",
                             sectionInfo: sectionInfo)
                             .frame(maxHeight: .greatestFiniteMagnitude)
                         
@@ -343,6 +344,7 @@ extension AudioTrackView {
                             SectionListRowView(
                                 geo: geo,
                                 trackTitle: track.items[1].wrappedValue,
+                                url: track.wrappedValue.url?.absoluteString ?? "",
                                 sectionInfo: sectionInfo)
                                 .frame(maxHeight: .greatestFiniteMagnitude)
                         }
@@ -414,13 +416,13 @@ extension AudioTrackView {
 
     }
     
-    private func SectionListRowView(geo: GeometryProxy, trackTitle: String, sectionInfo:Binding<SectionInfo>) -> some View {
+    private func SectionListRowView(geo: GeometryProxy, trackTitle: String, url: String, sectionInfo:Binding<SectionInfo>) -> some View {
         
         Text(getIndex(trackTitle: trackTitle, tracks: sectionInfo.wrappedValue.tracks))
             .frame(height: 30)
             .frame(width: geo.size.width/6.8)
             .background(Color.gray.opacity(trackTitle == sectionInfo.wrappedValue.selectedTrack ? 0.5 : 0))
-            .background(isCurrentlyPlaying(url: getUrl(trackTitle: trackTitle, tracks: sectionInfo.wrappedValue.tracks)) ? Color.pink : Color.clear)
+            .background(isCurrentlyPlaying(url: url) ? Color.pink : Color.clear)
             .background{ AudioFilesRowBackgroundView() }
             .cornerRadius(10)
             .contentShape(Rectangle())
@@ -557,11 +559,6 @@ extension AudioTrackView {
     private func getIndex(trackTitle: String, tracks: [SectionInfo.Track]) -> String {
         let index = tracks.firstIndex(where: { $0.items.contains(trackTitle)}) ?? -1
         return "\(index + 1)"
-    }
-    
-    private func getUrl(trackTitle: String, tracks: [SectionInfo.Track]) -> String {
-        let index = tracks.firstIndex(where: { $0.items.contains(trackTitle)}) ?? -1
-        return tracks[index].url?.absoluteString ?? ""
     }
     
     private func filesImported(result: Result<[URL], Error>) {
