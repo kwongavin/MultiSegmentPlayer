@@ -11,12 +11,12 @@ class MainModel: ObservableObject {
     
     // Track names, user can add-subtract this values at any time.
     @Published var tracks: [String] = ["Hey Jude", "Yesterday", "Come Together"]
-    @Published var sections: [SectionInfo] = [] { didSet { createSegments() } }
+    @Published var sections: [SectionInfo] = []
     @Published var titleDisplayIndex = 0
     
     // For Audio Player
     // TODO: - Rename to segments2dArray
-    @Published var segments2d: [[MockSegment]] = [] { didSet { setEndTime() }}
+    @Published var segments2d: [[MockSegment]] = [] //{ didSet { setEndTime() }}
     @Published var playingSegmentIndex = 0
     
     @Published var endTime: TimeInterval = 0
@@ -108,15 +108,17 @@ extension MainModel {
     
     func createSegments() {
         
-        var newSegments: [MockSegment] = []
         self.segments2d = []
+        self.playingSegmentIndex = 0
         
         for section in sections {
+            
+            var newSegments: [MockSegment] = []
             
             // check if section has tracks
             if section.tracks.isEmpty { continue }
             
-            for (index,track) in section.tracks.enumerated() {
+            for track in section.tracks {
                 guard let url = track.items.randomElement()?.url else { continue }
                 let didStartAccessing = url.startAccessingSecurityScopedResource()
                 
@@ -143,6 +145,8 @@ extension MainModel {
             
         }
         
+        setEndTime()
+        
     }
     
     private func isPlayingDidSet() {
@@ -151,7 +155,8 @@ extension MainModel {
         
         if !isPlaying {
             engine.stop()
-            startAudioEngine() // this is temporary solution, should be player.stop()
+            //startAudioEngine() // this is temporary solution, should be player.stop()
+            player.stop()
             _timeStamp = 0
             // Stop accessing the security-scoped resource for all segments
             for segment in segments {
@@ -165,6 +170,7 @@ extension MainModel {
             }
             
             // for highlighting the first track
+            startAudioEngine()
             GlobalModel.playingUrl = "first track"
             player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
         }
@@ -180,7 +186,36 @@ extension MainModel {
     }
     
     func trackEnded(url: String) {
-        let segments = segments2d
+        
+        // check if first track
+        guard url != "first track" else { return }
+        
+        // get segment
+        guard let segments = segments2d[safe: playingSegmentIndex] else { return }
+        
+        // check if last track of audio file
+        guard url == segments.last?.audioFileURL.absoluteString else { return }
+        
+        // stop playing
+        isPlaying = false
+        
+        
+        // set next segment
+        if playingSegmentIndex == segments2d.count - 1 {
+            playingSegmentIndex = 0
+            setEndTime()
+            return
+        }
+        else {
+            playingSegmentIndex += 1
+        }
+        
+        // play the next segment
+        setEndTime()
+        isPlaying = true
+        
     }
+    
+    
     
 }

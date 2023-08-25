@@ -617,9 +617,9 @@ extension AudioTrackView {
         let nextTrackIndex = indexOfFinishedTrack + 1
         
         // return if its the last track
-        guard nextTrackIndex < model.segments2d.count else { return false }
+        guard nextTrackIndex < model.segments2d[model.playingSegmentIndex].count else { return false }
         
-        return url == model.segments2d[model.playingSegmentIndex][nextTrackIndex].audioFileURL.absoluteString
+        return url == model.segments2d[safe: model.playingSegmentIndex]?[safe: nextTrackIndex]?.audioFileURL.absoluteString
         
     }
 
