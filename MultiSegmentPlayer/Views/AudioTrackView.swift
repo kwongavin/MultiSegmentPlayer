@@ -80,6 +80,9 @@ struct AudioTrackView: View {
             
             model.sections = sec
         }
+        .onChange(of: global.playingUrl) { newValue in
+            model.trackEnded(url: global.playingUrl)
+        }
     }
     
 }
@@ -605,18 +608,18 @@ extension AudioTrackView {
         guard model.isPlaying else { return false }
         
         // handling for first track
-        if global.playingUrl == "first track", url == model.segments[model.playingSegmentIndex].first?.audioFileURL.absoluteString ?? "" { return true }
+        if global.playingUrl == "first track", url == model.segments2d[model.playingSegmentIndex].first?.audioFileURL.absoluteString ?? "" { return true }
         
         // get the index of the of the file that just finished playing
-        guard let indexOfFinishedTrack = model.segments[model.playingSegmentIndex].firstIndex(where: {$0.audioFileURL.absoluteString == global.playingUrl }) else { return false }
+        guard let indexOfFinishedTrack = model.segments2d[model.playingSegmentIndex].firstIndex(where: {$0.audioFileURL.absoluteString == global.playingUrl }) else { return false }
         
         // index of the next track
         let nextTrackIndex = indexOfFinishedTrack + 1
         
         // return if its the last track
-        guard nextTrackIndex < model.segments.count else { return false }
+        guard nextTrackIndex < model.segments2d.count else { return false }
         
-        return url == model.segments[model.playingSegmentIndex][nextTrackIndex].audioFileURL.absoluteString
+        return url == model.segments2d[model.playingSegmentIndex][nextTrackIndex].audioFileURL.absoluteString
         
     }
 

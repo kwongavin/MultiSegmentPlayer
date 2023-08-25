@@ -16,7 +16,7 @@ class MainModel: ObservableObject {
     
     // For Audio Player
     // TODO: - Rename to segments2dArray
-    @Published var segments: [[MockSegment]] = [] { didSet { setEndTime() }}
+    @Published var segments2d: [[MockSegment]] = [] { didSet { setEndTime() }}
     @Published var playingSegmentIndex = 0
     
     @Published var endTime: TimeInterval = 0
@@ -64,12 +64,12 @@ class MainModel: ObservableObject {
 extension MainModel {
     
     func setEndTime() {
-        guard segments.isNotEmpty else { return }
-        let count = segments[playingSegmentIndex].count
+        guard segments2d.isNotEmpty else { return }
+        let count = segments2d[playingSegmentIndex].count
         if count == 0 {
             endTime = 0.0
         } else {
-            endTime = segments[playingSegmentIndex][count - 1].playbackEndTime
+            endTime = segments2d[playingSegmentIndex][count - 1].playbackEndTime
         }
     }
     
@@ -109,14 +109,14 @@ extension MainModel {
     func createSegments() {
         
         var newSegments: [MockSegment] = []
-        self.segments = []
+        self.segments2d = []
         
         for section in sections {
             
             // check if section has tracks
             if section.tracks.isEmpty { continue }
             
-            for track in section.tracks {
+            for (index,track) in section.tracks.enumerated() {
                 guard let url = track.items.randomElement()?.url else { continue }
                 let didStartAccessing = url.startAccessingSecurityScopedResource()
                 
@@ -127,7 +127,11 @@ extension MainModel {
                     // If there is no last segment (i.e., if this is the first segment), we default to 0.0.
                     let playbackStartTime = (newSegments.last?.playbackEndTime ?? 0.0) - 0.07
                     
-                    if let segment = try? MockSegment(audioFileURL: url, playbackStartTime: playbackStartTime, rmsFramesPerSecond: rmsFramesPerSecond) {
+                    if let segment = try? MockSegment(
+                        audioFileURL: url,
+                        playbackStartTime: playbackStartTime,
+                        rmsFramesPerSecond: rmsFramesPerSecond
+                    ) {
                         newSegments.append(segment)
                     }
                 } else {
@@ -135,7 +139,7 @@ extension MainModel {
                 }
             }
             
-            self.segments.append(newSegments)
+            self.segments2d.append(newSegments)
             
         }
         
@@ -143,7 +147,7 @@ extension MainModel {
     
     private func isPlayingDidSet() {
         
-        let segments = segments[playingSegmentIndex]
+        let segments = segments2d[playingSegmentIndex]
         
         if !isPlaying {
             engine.stop()
@@ -173,6 +177,10 @@ extension MainModel {
             timeStamp += (timeNow - timePrevious)
             timePrevious = timeNow
         }
+    }
+    
+    func trackEnded(url: String) {
+        let segments = segments2d
     }
     
 }
