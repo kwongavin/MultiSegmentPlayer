@@ -605,10 +605,10 @@ extension AudioTrackView {
         guard model.isPlaying else { return false }
         
         // handling for first track
-        if global.playingUrl == "first track", url == model.segments.first?.audioFileURL.absoluteString ?? "" { return true }
+        if global.playingUrl == "first track", url == model.segments[model.playingSegmentIndex].first?.audioFileURL.absoluteString ?? "" { return true }
         
         // get the index of the of the file that just finished playing
-        guard let indexOfFinishedTrack = model.segments.firstIndex(where: {$0.audioFileURL.absoluteString == global.playingUrl }) else { return false }
+        guard let indexOfFinishedTrack = model.segments[model.playingSegmentIndex].firstIndex(where: {$0.audioFileURL.absoluteString == global.playingUrl }) else { return false }
         
         // index of the next track
         let nextTrackIndex = indexOfFinishedTrack + 1
@@ -616,7 +616,7 @@ extension AudioTrackView {
         // return if its the last track
         guard nextTrackIndex < model.segments.count else { return false }
         
-        return url == model.segments[nextTrackIndex].audioFileURL.absoluteString
+        return url == model.segments[model.playingSegmentIndex][nextTrackIndex].audioFileURL.absoluteString
         
     }
 

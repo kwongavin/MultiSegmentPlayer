@@ -14,9 +14,10 @@ class MainModel: ObservableObject {
     @Published var sections: [SectionInfo] = [] { didSet { createSegments() } }
     @Published var titleDisplayIndex = 0
     
-    
     // For Audio Player
-    @Published var segments: [MockSegment] = [] { didSet { setEndTime() }}
+    // TODO: - Rename to segments2dArray
+    @Published var segments: [[MockSegment]] = [] { didSet { setEndTime() }}
+    @Published var playingSegmentIndex = 0
     
     @Published var endTime: TimeInterval = 0
     @Published var _timeStamp: TimeInterval = 0
@@ -63,10 +64,12 @@ class MainModel: ObservableObject {
 extension MainModel {
     
     func setEndTime() {
-        if segments.count == 0 {
+        guard segments.isNotEmpty else { return }
+        let count = segments[playingSegmentIndex].count
+        if count == 0 {
             endTime = 0.0
         } else {
-            endTime = segments[segments.count - 1].playbackEndTime
+            endTime = segments[playingSegmentIndex][count - 1].playbackEndTime
         }
     }
     
@@ -106,6 +109,7 @@ extension MainModel {
     func createSegments() {
         
         var newSegments: [MockSegment] = []
+        self.segments = []
         
         for section in sections {
             
@@ -131,14 +135,15 @@ extension MainModel {
                 }
             }
             
-            // only crete segment for the first section which has tracks
-            break
+            self.segments.append(newSegments)
+            
         }
         
-        self.segments = newSegments
     }
     
     private func isPlayingDidSet() {
+        
+        let segments = segments[playingSegmentIndex]
         
         if !isPlaying {
             engine.stop()

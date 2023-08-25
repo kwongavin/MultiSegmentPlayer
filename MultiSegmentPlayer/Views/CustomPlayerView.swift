@@ -60,7 +60,7 @@ extension CustomPlayerView {
         
         ZStack(alignment: .leading) {
             
-            TrackView(segments: model.segments,
+            TrackView(segments: model.segments[safe: model.playingSegmentIndex] ?? [],
                       rmsFramesPerSecond: model.rmsFramesPerSecond,
                       pixelsPerRMS: model.pixelsPerRMS)
             .background(Color.gray)
