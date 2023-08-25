@@ -80,11 +80,12 @@ extension CustomPlayerView {
     private func BackwardButtonView() -> some View {
         
         Button(action: {
-            if model.titleDisplayIndex > 0 {
-                model.titleDisplayIndex -= 1
-            } else {
-                model.titleDisplayIndex = model.tracks.count - 1
-            }
+//            if model.titleDisplayIndex > 0 {
+//                model.titleDisplayIndex -= 1
+//            } else {
+//                model.titleDisplayIndex = model.tracks.count - 1
+//            }
+            model.backButtonTapped()
         }, label: {
             Image(systemName: "backward.fill")
                 .resizable()
@@ -112,7 +113,8 @@ extension CustomPlayerView {
     private func ForwardButtonView() -> some View {
         
         Button(action: {
-            model.titleDisplayIndex = (model.titleDisplayIndex + 1) % model.tracks.count
+//            model.titleDisplayIndex = (model.titleDisplayIndex + 1) % model.tracks.count
+            model.forwardButtonTapped()
         }, label: {
             Image(systemName: "forward.fill")
                 .resizable()

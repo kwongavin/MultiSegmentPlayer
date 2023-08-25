@@ -207,6 +207,7 @@ extension MainModel {
             return
         }
         else {
+            isPlaying = false
             playingSegmentIndex += 1
         }
         
@@ -216,6 +217,41 @@ extension MainModel {
         
     }
     
+    func forwardButtonTapped() {
+        
+        
+        // if last segment
+        if playingSegmentIndex == segments2d.count - 1 {
+            return
+        }
+        else {
+            isPlaying = false
+            playingSegmentIndex += 1
+        }
+        
+        // play the next segment
+        GlobalModel.playingUrl = "first track"
+        setEndTime()
+        isPlaying = true
+        
+    }
     
+    func backButtonTapped() {
+        
+        // if is first segment
+        if playingSegmentIndex == 0 {
+            return
+        }
+        else {
+            isPlaying = false
+            playingSegmentIndex -= 1
+        }
+        
+        // play the next segment
+        GlobalModel.playingUrl = "first track"
+        setEndTime()
+        isPlaying = true
+        
+    }
     
 }
