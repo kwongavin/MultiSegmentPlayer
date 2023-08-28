@@ -75,12 +75,7 @@ extension MainModel {
     
     func setAudioSessionCategoriesWithOptions() {
         do {
-            try Settings.session.setCategory(.playAndRecord,
-                                             options: [.defaultToSpeaker,
-                                                       .mixWithOthers,
-                                                       .allowBluetooth,
-                                                       .allowBluetoothA2DP,
-                                                       .allowAirPlay])
+            try Settings.session.setCategory(.playback)
             try Settings.session.setActive(true)
         } catch {
             assertionFailure(error.localizedDescription)
@@ -127,7 +122,7 @@ extension MainModel {
                     
                     // The playback start time for each segment is the playback end time of the last segment, minus 0.07 (To avoid breaks).
                     // If there is no last segment (i.e., if this is the first segment), we default to 0.0.
-                    let playbackStartTime = (newSegments.last?.playbackEndTime ?? 0.0) - 0.07
+                    let playbackStartTime = (newSegments.last?.playbackEndTime ?? 0.0) - 0.05
                     
                     if let segment = try? MockSegment(
                         audioFileURL: url,
