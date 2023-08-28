@@ -52,6 +52,10 @@ struct AudioTrackView: View {
                         
                         AudioPlayerView(geo: geo)
                         
+                        //-------------------------------------------------- Reset Button
+                        
+                        AudioResetButton(geo: geo)
+                        
                     }
                     
                 }
@@ -621,6 +625,30 @@ extension AudioTrackView {
         
         return url == model.segments2d[safe: model.playingSegmentIndex]?[safe: nextTrackIndex]?.audioFileURL.absoluteString
         
+    }
+
+}
+
+// MARK: Reset Button
+extension AudioTrackView {
+    
+    private func AudioResetButton(geo: GeometryProxy) -> some View {
+                  
+            VStack {
+                Button(action: {}, label: {
+                    ZStack {
+                        Rectangle()
+                            .cornerRadius(10)
+                            .foregroundColor(Color("appColor2"))
+                        Text("Reset Audio Tracks")
+                            .font(Font.custom("Avenir Roman", size: geo.size.width*0.04))
+                            .foregroundColor(.white)
+                            .padding(.vertical)
+                    }
+                })
+                .padding()
+                .padding(.top)
+            }
     }
 
 }
