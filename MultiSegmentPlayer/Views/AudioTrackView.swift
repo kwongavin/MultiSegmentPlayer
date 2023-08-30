@@ -142,6 +142,7 @@ extension AudioTrackView {
             guard let receivedItem = values.first else { return true }
             removeFromAllSections(itemToRemove: receivedItem)
             audioFiles.append(receivedItem)
+            audioFiles.sort()
             return true
         }
 
@@ -571,6 +572,7 @@ extension AudioTrackView {
             let fileURLs = try result.get()
             self.fileURLs = fileURLs
             self.audioFiles = fileURLs.map { $0.lastPathComponent }
+            self.audioFiles.sort()
             
         } catch {
             errorMessage = error.localizedDescription
@@ -634,21 +636,32 @@ extension AudioTrackView {
     
     private func AudioResetButton(geo: GeometryProxy) -> some View {
                   
-            VStack {
-                Button(action: {}, label: {
-                    ZStack {
-                        Rectangle()
-                            .cornerRadius(10)
-                            .foregroundColor(Color("appColor2"))
-                        Text("Reset Audio Tracks")
-                            .font(Font.custom("Avenir Roman", size: geo.size.width*0.04))
-                            .foregroundColor(.white)
-                            .padding(.vertical)
-                    }
-                })
-                .padding()
-                .padding(.top)
-            }
+        VStack {
+            Button(action: {
+                
+                
+                
+            }, label: {
+                
+                ZStack {
+                    
+                    Rectangle()
+                        .cornerRadius(10)
+                        .foregroundColor(Color("appColor2"))
+                    
+                    
+                    Text("Reset Audio Tracks")
+                        .font(Font.custom("Avenir Roman", size: geo.size.width*0.04))
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                    
+                }
+                
+            })
+            .padding()
+            .padding(.top)
+        }
+        
     }
 
 }
