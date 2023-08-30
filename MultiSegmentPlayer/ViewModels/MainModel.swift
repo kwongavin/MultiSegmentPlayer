@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MediaPlayer
 
 class MainModel: ObservableObject {
     
@@ -50,6 +51,7 @@ class MainModel: ObservableObject {
         setAudioSessionCategoriesWithOptions()
         routeAudioToOutput()
         startAudioEngine()
+        setMediaPlayer()
         timer = Timer.scheduledTimer(timeInterval: 0.05,
                                      target: self,
                                      selector: #selector(checkTime),
@@ -93,6 +95,39 @@ extension MainModel {
             assertionFailure(error.localizedDescription)
         }
     }
+    
+    func setMediaPlayer() {
+        
+        // Declare an instance of MPRemoteCommandCenter
+        let commandCenter = MPRemoteCommandCenter.shared()
+
+        // Play
+        commandCenter.playCommand.addTarget { [weak self] _ in
+            self?.isPlaying = true
+            return .success
+        }
+
+        // Pause
+        commandCenter.pauseCommand.addTarget { [weak self] _ in
+            self?.isPlaying = false
+            return .success
+        }
+        
+        // Next
+        commandCenter.nextTrackCommand.addTarget { [weak self] _ in
+            self?.forwardButtonTapped()
+            return .success
+        }
+        
+        // Back
+        commandCenter.previousTrackCommand.addTarget { [weak self] _ in
+            self?.backButtonTapped()
+            return .success
+        }
+        
+    }
+    
+    
     
 }
 
@@ -146,7 +181,7 @@ extension MainModel {
     
     private func isPlayingDidSet() {
         
-        let segments = segments2d[playingSegmentIndex]
+        guard let segments = segments2d[safe: playingSegmentIndex] else { return }
         
         if !isPlaying {
             engine.stop()
@@ -168,6 +203,7 @@ extension MainModel {
             startAudioEngine()
             GlobalModel.playingUrl = "first track"
             player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
+            updateMediaPlayer()
         }
         
     }
@@ -246,6 +282,18 @@ extension MainModel {
         GlobalModel.playingUrl = "first track"
         setEndTime()
         isPlaying = true
+        
+    }
+    
+    func updateMediaPlayer() {
+        
+        let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
+        var nowPlayingInfo = [String: Any]() // Set the appropriate metadata for your audio
+        nowPlayingInfo[MPMediaItemPropertyTitle] = "Title"
+        nowPlayingInfo[MPMediaItemPropertyArtist] = "Artist"
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1.0 // Set the correct playback rate
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = 5
+        nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
         
     }
     
