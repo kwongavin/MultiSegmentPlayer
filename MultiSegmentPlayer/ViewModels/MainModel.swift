@@ -251,6 +251,7 @@ extension MainModel {
         
         // if last segment
         if playingSegmentIndex == segments2d.count - 1 {
+            isPlaying = false
             return
         }
         else {
@@ -269,6 +270,7 @@ extension MainModel {
         
         // if is first segment
         if playingSegmentIndex == 0 {
+            isPlaying = false
             return
         }
         else {
