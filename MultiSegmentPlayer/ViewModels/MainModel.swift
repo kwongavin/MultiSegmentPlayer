@@ -226,27 +226,23 @@ extension MainModel {
         guard url == segments.last?.audioFileURL.absoluteString else { return }
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            
-            // stop playing
-            self.isPlaying = false
-            
-            // set next segment
-            if self.playingSegmentIndex == self.segments2d.count - 1 {
-                self.playingSegmentIndex = 0
-                self.setEndTime()
-                return
-            }
-            else {
-                self.isPlaying = false
-                self.playingSegmentIndex += 1
-            }
-            
-            // play the next segment
+        // stop playing
+        self.isPlaying = false
+        
+        // set next segment
+        if self.playingSegmentIndex == self.segments2d.count - 1 {
+            self.playingSegmentIndex = 0
             self.setEndTime()
-            self.isPlaying = true
-            
+            return
         }
+        else {
+            self.isPlaying = false
+            self.playingSegmentIndex += 1
+        }
+        
+        // play the next segment
+        self.setEndTime()
+        self.isPlaying = true
         
     }
     

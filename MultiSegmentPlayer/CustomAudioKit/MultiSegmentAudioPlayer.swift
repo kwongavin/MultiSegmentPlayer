@@ -120,7 +120,7 @@ public class MultiSegmentAudioPlayer: Node {
                                        frameCount: AVAudioFrameCount(totalFrames),
                                        at: whenToPlay,
                                        completionHandler: {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){
                     GlobalModel.playingUrl = segment.audioFile.url.absoluteString
                 }
             })
