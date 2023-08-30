@@ -225,24 +225,28 @@ extension MainModel {
         // check if last track of audio file
         guard url == segments.last?.audioFileURL.absoluteString else { return }
         
-        // stop playing
-        isPlaying = false
         
-        
-        // set next segment
-        if playingSegmentIndex == segments2d.count - 1 {
-            playingSegmentIndex = 0
-            setEndTime()
-            return
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            
+            // stop playing
+            self.isPlaying = false
+            
+            // set next segment
+            if self.playingSegmentIndex == self.segments2d.count - 1 {
+                self.playingSegmentIndex = 0
+                self.setEndTime()
+                return
+            }
+            else {
+                self.isPlaying = false
+                self.playingSegmentIndex += 1
+            }
+            
+            // play the next segment
+            self.setEndTime()
+            self.isPlaying = true
+            
         }
-        else {
-            isPlaying = false
-            playingSegmentIndex += 1
-        }
-        
-        // play the next segment
-        setEndTime()
-        isPlaying = true
         
     }
     
