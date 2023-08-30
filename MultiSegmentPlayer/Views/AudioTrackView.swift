@@ -143,6 +143,12 @@ extension AudioTrackView {
             removeFromAllSections(itemToRemove: receivedItem)
             audioFiles.append(receivedItem)
             audioFiles.sort()
+            
+            // reset the audio player view
+            model.isPlaying = false
+            model.endTime = 0
+            model._timeStamp = 0
+            model.createSegments()
             return true
         }
 
