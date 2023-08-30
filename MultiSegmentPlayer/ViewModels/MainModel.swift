@@ -230,6 +230,7 @@ extension MainModel {
         
         // set next segment
         if self.playingSegmentIndex == self.segments2d.count - 1 {
+            createSegments()
             self.playingSegmentIndex = 0
             self.setEndTime()
             return
