@@ -13,7 +13,6 @@ class MainModel: ObservableObject {
     // Track names, user can add-subtract this values at any time.
     @Published var tracks: [String] = ["Hey Jude", "Yesterday", "Come Together"]
     @Published var sections: [SectionInfo] = []
-    @Published var titleDisplayIndex = 0
     
     // For Audio Player
     // TODO: - Rename to segments2dArray
@@ -248,7 +247,6 @@ extension MainModel {
     
     func forwardButtonTapped() {
         
-        
         // if last segment
         if playingSegmentIndex == segments2d.count - 1 {
             isPlaying = false
@@ -288,12 +286,24 @@ extension MainModel {
     func updateMediaPlayer() {
         
         let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
-        var nowPlayingInfo = [String: Any]() // Set the appropriate metadata for your audio
-        nowPlayingInfo[MPMediaItemPropertyTitle] = "Title"
-        nowPlayingInfo[MPMediaItemPropertyArtist] = "Artist"
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1.0 // Set the correct playback rate
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = 5
+        var nowPlayingInfo = [String: Any]()
+        nowPlayingInfo[MPMediaItemPropertyTitle] = getSectionName()
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = endTime.magnitude
         nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+        
+    }
+    
+    func getSectionName() -> String {
+        
+        guard let url = segments2d[safe: playingSegmentIndex]?.first?.audioFileURL else { return "" }
+        
+        for section in sections {
+            var isPlayingSection = section.tracks.first?.items.contains(where: { $0.url == url }) ?? false
+            if isPlayingSection { return section.title }
+        }
+        
+        return ""
         
     }
     

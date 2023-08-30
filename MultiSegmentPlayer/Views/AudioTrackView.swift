@@ -502,7 +502,7 @@ extension AudioTrackView {
                 Text("AUDIO PLAYER")
                 Spacer()
                 if model.isPlaying {
-                    Text("::: \(model.tracks[model.titleDisplayIndex])")
+                    Text("::: \(model.getSectionName())")
                 }
             }
             .font(Font.custom("Futura Medium", size: geo.size.width*0.04))
