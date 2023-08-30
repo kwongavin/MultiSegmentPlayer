@@ -608,7 +608,7 @@ extension AudioTrackView {
         
     }
     
-    func isCurrentlyPlaying(url: String) -> Bool {
+    private func isCurrentlyPlaying(url: String) -> Bool {
         
         // check if player is playing
         guard model.isPlaying else { return false }
@@ -628,6 +628,37 @@ extension AudioTrackView {
         return url == model.segments2d[safe: model.playingSegmentIndex]?[safe: nextTrackIndex]?.audioFileURL.absoluteString
         
     }
+    
+    private func resetAudioTracks() {
+        
+        var tracksNames = [String]()
+        
+        // get all tracks
+        for section in model.sections {
+            for track in section.tracks {
+                tracksNames.append(contentsOf: track.items.map({$0.name}))
+            }
+        }
+        
+        // add tracks in audio files
+        self.audioFiles.append(contentsOf: tracksNames)
+        self.audioFiles.sort()
+        
+        // remove tracks from all sections
+        for index in 0 ..< model.sections.count {
+            model.sections[index].tracks.removeAll()
+            model.sections[index].selectedTrack = nil
+        }
+        
+        // remove all tracks from segments
+        model.isPlaying = false
+        model.segments2d.removeAll()
+        model.createSegments()
+        model.endTime = 0
+        model._timeStamp = 0
+        
+    }
+
 
 }
 
@@ -638,8 +669,11 @@ extension AudioTrackView {
                   
         VStack {
             Button(action: {
-                
-                
+
+                customAlertApple(title: "Reset Tracks?", message: "Are you sure you want to reset all tracks?", showDestructive: true) { success in
+                    guard success else { return }
+                    resetAudioTracks()
+                }
                 
             }, label: {
                 
