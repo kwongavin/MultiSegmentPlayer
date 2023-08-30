@@ -100,6 +100,7 @@ extension CustomPlayerView {
         
         Button(action: {
             model.isPlaying.toggle()
+            model.isPlayButtonPaused = !model.isPlaying
         }, label: {
             Image(systemName: model.isPlaying ? "pause.circle.fill" : "play.circle.fill")
                 .resizable()

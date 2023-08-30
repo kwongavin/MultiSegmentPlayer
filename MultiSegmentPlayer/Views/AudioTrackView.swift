@@ -416,7 +416,7 @@ extension AudioTrackView {
             
             // save the dropped URL in the track's URL property
             if let fileUrl = fileURLs.first(where: { $0.lastPathComponent == item }) {
-                var track = SectionInfo.Track(items: [SectionInfo.TrackInfo(name: item, url: fileUrl)])
+                let track = SectionInfo.Track(items: [SectionInfo.TrackInfo(name: item, url: fileUrl)])
                 sectionInfo.wrappedValue.tracks.append(track)
                 model.createSegments()
             }

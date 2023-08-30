@@ -22,6 +22,7 @@ class MainModel: ObservableObject {
     @Published var endTime: TimeInterval = 0
     @Published var _timeStamp: TimeInterval = 0
     @Published var isPlaying: Bool = false { didSet { isPlayingDidSet() } }
+    @Published var isPlayButtonPaused = false // state of play/pause button
     
     let engine = AudioEngine()
     let player = MultiSegmentAudioPlayer()
@@ -201,6 +202,7 @@ extension MainModel {
             GlobalModel.playingUrl = "first track"
             player.playSegments(audioSegments: segments, referenceTimeStamp: timeStamp)
             updateMediaPlayer()
+            isPlayButtonPaused = false
         }
         
     }
@@ -214,6 +216,9 @@ extension MainModel {
     }
     
     func trackEnded(url: String) {
+        
+        // this function is being called when user taps pause, this check is to handle that scenario
+        guard isPlayButtonPaused == false else { return }
         
         // check if first track
         guard url != "first track" else { return }
@@ -248,9 +253,13 @@ extension MainModel {
     
     func forwardButtonTapped() {
         
+        // check if tracks are being played
+        var isCurrentlyPlaying = isPlaying
+        
         // if last segment
         if playingSegmentIndex == segments2d.count - 1 {
             isPlaying = false
+            isPlayButtonPaused = true
             return
         }
         else {
@@ -261,15 +270,20 @@ extension MainModel {
         // play the next segment
         GlobalModel.playingUrl = "first track"
         setEndTime()
-        isPlaying = true
+        if isCurrentlyPlaying { isPlaying = true }
+        else { updateMediaPlayer() }
         
     }
     
     func backButtonTapped() {
         
+        // check if tracks are being played
+        var isCurrentlyPlaying = isPlaying
+        
         // if is first segment
         if playingSegmentIndex == 0 {
             isPlaying = false
+            isPlayButtonPaused = true
             return
         }
         else {
@@ -280,7 +294,8 @@ extension MainModel {
         // play the next segment
         GlobalModel.playingUrl = "first track"
         setEndTime()
-        isPlaying = true
+        if isCurrentlyPlaying { isPlaying = true }
+        else { updateMediaPlayer() }
         
     }
     
@@ -300,7 +315,7 @@ extension MainModel {
         guard let url = segments2d[safe: playingSegmentIndex]?.first?.audioFileURL else { return "" }
         
         for section in sections {
-            var isPlayingSection = section.tracks.first?.items.contains(where: { $0.url == url }) ?? false
+            let isPlayingSection = section.tracks.first?.items.contains(where: { $0.url == url }) ?? false
             if isPlayingSection { return section.title }
         }
         
